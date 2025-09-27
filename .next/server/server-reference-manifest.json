@@ -1,0 +1,14 @@
+{
+  "node": {
+    "feab8da8bf2e419264589ebd31a23e03f6bbc38a": {
+      "workers": {
+        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fjasondesiderio%2FSites%2Fthegfnc%2Fplace-to-stand%2Fapp%2Factions%2Fsend-contact.ts%22%2C%5B%22sendContact%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "FZhc3Ig+vsd5WhgfSY9h+4vHXTGSO83rEgdJ64gYDGM="
+}

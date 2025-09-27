@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink-light text-ink font-sans antialiased;
+}
+
+a {
+  @apply text-ink underline-offset-4 transition-colors;
+}
+
+a:hover {
+  @apply text-ink/80;
+}
+
+::selection {
+  background: rgba(190, 147, 197, 0.25);
+}
