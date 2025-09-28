@@ -1,1 +1,42 @@
-node_modules
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+
+# Next.js build and cache directories
+.next/
+out/
+.vercel/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.production.local
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.bak
+*.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+
+# Misc
+*.tgz
+*.zip
+.pnpm-store/
