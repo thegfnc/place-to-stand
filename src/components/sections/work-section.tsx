@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { AnimatedSection } from "@/components/layout/animated-section";
 
 type Project = {
@@ -87,13 +86,15 @@ export function WorkSection() {
                 {project.title}
               </h3>
               <p className="text-sm text-ink/60">{project.description}</p>
-              <Link
+              <a
                 href={project.href}
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.3em] text-ink transition hover:text-ink/70"
               >
                 View Project
                 <span aria-hidden>→</span>
-              </Link>
+              </a>
             </div>
           </article>
         ))}

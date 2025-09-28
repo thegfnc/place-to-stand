@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/layout/animated-section";
 
+const hashHref = (hash: string) => ({ pathname: "/", hash });
+
 export function HeroSection() {
   return (
     <AnimatedSection
@@ -20,10 +22,10 @@ export function HeroSection() {
       </p>
       <div className="flex flex-col items-center gap-4 sm:flex-row">
         <Button asChild size="lg">
-          <Link href="#work">See Our Work</Link>
+          <Link href={hashHref("work")}>See Our Work</Link>
         </Button>
         <Button asChild variant="ghost" size="lg">
-          <Link href="#contact">Talk With Us</Link>
+          <Link href={hashHref("contact")}>Talk With Us</Link>
         </Button>
       </div>
     </AnimatedSection>

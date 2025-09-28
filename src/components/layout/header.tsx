@@ -6,13 +6,15 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
-  { href: "#how-we-work", label: "How We Work" },
-  { href: "#team", label: "Team" },
-  { href: "#work", label: "Work" },
-  { href: "#contact", label: "Contact" }
+  { hash: "about", label: "About" },
+  { hash: "services", label: "Services" },
+  { hash: "how-we-work", label: "How We Work" },
+  { hash: "team", label: "Team" },
+  { hash: "work", label: "Work" },
+  { hash: "contact", label: "Contact" }
 ];
+
+const hashHref = (hash: string) => ({ pathname: "/", hash });
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -41,7 +43,7 @@ export function Header() {
           scrolled ? "bg-white/70 shadow-md" : "bg-white/40"
         )}
       >
-        <Link href="#home" className="flex items-center gap-3">
+        <Link href={hashHref("home")} className="flex items-center gap-3">
           <span className="h-9 w-9 rounded-full bg-gradientPrimary" aria-hidden />
           <span className="font-logo text-xl uppercase tracking-[0.24em] text-ink">
             Place To Stand
@@ -50,8 +52,8 @@ export function Header() {
         <nav className="hidden items-center gap-5 md:flex">
           {NAV_LINKS.map((item) => (
             <Link
-              key={item.href}
-              href={item.href}
+              key={item.hash}
+              href={hashHref(item.hash)}
               className="text-sm font-semibold uppercase tracking-[0.2em] text-ink/70 transition hover:text-ink"
             >
               {item.label}
@@ -60,7 +62,7 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-3">
           <Button asChild size="sm" variant="secondary" className="hidden md:inline-flex">
-            <Link href="#contact">Start a Project</Link>
+            <Link href={hashHref("contact")}>Start a Project</Link>
           </Button>
           <button
             type="button"
@@ -92,8 +94,8 @@ export function Header() {
       >
         {NAV_LINKS.map((item) => (
           <Link
-            key={item.href}
-            href={item.href}
+            key={item.hash}
+            href={hashHref(item.hash)}
             className="rounded-full px-6 py-3 text-base font-semibold uppercase tracking-[0.2em] text-ink/80 transition hover:bg-ink hover:text-ink-light"
             onClick={() => setMobileOpen(false)}
           >

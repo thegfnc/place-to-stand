@@ -8,18 +8,21 @@ import { Toaster } from "@/components/ui/use-toast";
 
 const afacad = Afacad({
   subsets: ["latin"],
-  variable: "--font-afacad"
+  variable: "--font-afacad",
+  adjustFontFallback: false
 });
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
   subsets: ["latin"],
-  variable: "--font-bebas-neue"
+  variable: "--font-bebas-neue",
+  adjustFontFallback: false
 });
 
 const sourceSans = Source_Sans_3({
   subsets: ["latin"],
-  variable: "--font-source-sans"
+  variable: "--font-source-sans",
+  adjustFontFallback: false
 });
 
 export const metadata: Metadata = {
