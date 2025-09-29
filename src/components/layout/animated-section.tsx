@@ -1,61 +1,68 @@
-"use client";
+'use client'
 
-import { useEffect, useRef, useState } from "react";
-import type { ComponentProps } from "react";
-import { cn } from "@/lib/utils";
+import { useEffect, useRef, useState } from 'react'
+import type { ComponentProps } from 'react'
+import { cn } from '@/src/lib/utils'
 
-interface AnimatedSectionProps extends ComponentProps<"section"> {
-  id?: string;
+interface AnimatedSectionProps extends ComponentProps<'section'> {
+  id?: string
 }
 
-export function AnimatedSection({ className, children, id, ...props }: AnimatedSectionProps) {
-  const ref = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
+export function AnimatedSection({
+  className,
+  children,
+  id,
+  ...props
+}: AnimatedSectionProps) {
+  const ref = useRef<HTMLElement | null>(null)
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
 
     if (prefersReducedMotion) {
-      setVisible(true);
-      return;
+      setVisible(true)
+      return
     }
 
-    const node = ref.current;
-    if (!node) return;
+    const node = ref.current
+    if (!node) return
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
-            setVisible(true);
-            observer.disconnect();
+            setVisible(true)
+            observer.disconnect()
           }
-        });
+        })
       },
       {
-        threshold: 0.2
+        threshold: 0.2,
       }
-    );
+    )
 
-    observer.observe(node);
+    observer.observe(node)
 
-    return () => observer.disconnect();
-  }, []);
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <section
       id={id}
-      ref={(node) => {
-        ref.current = node;
+      ref={node => {
+        ref.current = node
       }}
       className={cn(
-        "mx-auto w-full max-w-6xl px-6 py-20 opacity-0 transition-all duration-700 ease-out will-change-transform",
-        visible ? "translate-y-0 opacity-100" : "translate-y-4",
+        'mx-auto w-full max-w-6xl px-6 py-20 opacity-0 transition-all duration-700 ease-out will-change-transform',
+        visible ? 'translate-y-0 opacity-100' : 'translate-y-4',
         className
       )}
       {...props}
     >
       {children}
     </section>
-  );
+  )
 }
