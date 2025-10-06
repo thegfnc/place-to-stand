@@ -26,7 +26,7 @@ const sourceSans = Source_Sans_3({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.placetostand.agency'),
+  metadataBase: new URL('https://placetostandagency.com/'),
   title: {
     default: 'Place To Stand | Your Lever in the Digital World',
     template: '%s | Place To Stand',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: 'Place To Stand | Your Lever in the Digital World',
     description:
       'We help small businesses make big moves with the right tools and a solid foundation. Digital Strategy, Development, and Marketing.',
-    url: 'https://www.placetostand.agency',
+    url: 'https://placetostandagency.com/',
     siteName: 'Place To Stand',
     locale: 'en_US',
     type: 'website',
