@@ -8,16 +8,16 @@ export function HeroSection() {
   return (
     <AnimatedSection
       id='home'
-      className='relative flex max-w-none flex-col items-center gap-6 overflow-hidden bg-gradientPrimary px-8 pb-44 pt-[260px] text-center text-ink shadow-xl'
+      className='relative flex max-w-none flex-col items-center gap-6 overflow-hidden bg-gradientPrimary px-8 pb-28 pt-[200px] text-center text-ink shadow-xl md:pb-44 md:pt-[260px]'
     >
       <div
         className='absolute inset-0 -z-10 bg-[radial-gradient(circle,_rgba(255,255,255,0.65)_0%,_rgba(255,255,255,0)_60%)]'
         aria-hidden
       />
-      <h1 className='max-w-3xl text-balance font-headline text-5xl font-semibold uppercase !leading-[.9] text-ink md:text-6xl'>
+      <h1 className='max-w-3xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-ink md:text-6xl'>
         Your lever in the digital world
       </h1>
-      <p className='max-w-2xl text-lg text-ink/80'>
+      <p className='max-w-2xl text-base text-ink/80 md:text-lg'>
         Businesses don’t need to be huge to make big moves; they just need the
         right tools and a solid foundation. Place To Stand is the strategic,
         design, and development partner building experiences that help ambitious

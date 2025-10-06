@@ -10,7 +10,7 @@ const team = [
   },
   {
     name: 'Damon Bodine',
-    title: 'Project Manager & Strategist',
+    title: 'Project Manager & AI Strategist',
     image:
       'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?auto=format&fit=crop&w=800&q=80',
   },

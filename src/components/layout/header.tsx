@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { hash: 'work', label: 'Work' },
   { hash: 'how-we-work', label: 'How We Work' },
   { hash: 'team', label: 'Team' },
+  { hash: 'faq', label: 'FAQ' },
   { hash: 'contact', label: 'Contact' },
 ]
 
@@ -94,26 +95,32 @@ export function Header() {
           </button>
         </div>
       </div>
-      <nav
-        id='mobile-nav'
+      <div
         className={cn(
-          'absolute top-full mt-3 flex w-full max-w-6xl flex-col gap-2 rounded-xl bg-white/95 p-6 text-center shadow-xl transition md:hidden',
+          'absolute top-full w-full max-w-6xl px-4 transition md:hidden',
           mobileOpen
             ? 'pointer-events-auto opacity-100'
             : 'pointer-events-none opacity-0'
         )}
       >
-        {NAV_LINKS.map(item => (
-          <Link
-            key={item.hash}
-            href={hashHref(item.hash)}
-            className='rounded-full px-6 py-3 text-base font-semibold uppercase tracking-[0.2em] text-ink/80 transition hover:bg-ink hover:text-ink-light'
-            onClick={() => setMobileOpen(false)}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </nav>
+        <nav
+          id='mobile-nav'
+          className={cn(
+            'flex w-full max-w-6xl flex-col gap-2 rounded-[28px] border border-ink/10 bg-white p-6 text-center shadow-xl transition md:hidden'
+          )}
+        >
+          {NAV_LINKS.map(item => (
+            <Link
+              key={item.hash}
+              href={hashHref(item.hash)}
+              className='rounded-full px-6 py-3 text-base font-semibold uppercase tracking-[0.2em] text-ink/80 transition hover:bg-ink hover:text-ink-light'
+              onClick={() => setMobileOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </header>
   )
 }

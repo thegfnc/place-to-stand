@@ -42,20 +42,20 @@ const projects: Project[] = [
       'A clean beauty and skincare line founded by Millie Bobby Brown.',
   },
   {
-    title: 'Officina del Bere 1397',
-    href: 'https://officinadelbere1397.com',
-    image:
-      'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
-    description:
-      'A specialty shop offering elegant, functional wine and bar accessories.',
-  },
-  {
     title: '9 Point Studios',
     href: 'https://9pointstudios.com',
     image:
       'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
     description:
       'A world-class recording and video production facility for creative artists.',
+  },
+  {
+    title: 'Officina del Bere 1397',
+    href: 'https://officinadelbere1397.com',
+    image:
+      'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
+    description:
+      'A specialty shop offering elegant, functional wine and bar accessories.',
   },
   {
     title: 'The Good for Nothings Club',
@@ -92,16 +92,20 @@ export function WorkSection() {
       </div>
       <div className='grid gap-6 md:grid-cols-2'>
         {projects.map(project => (
-          <article
+          <a
             key={project.title}
-            className='group flex flex-col overflow-hidden rounded-xl border border-ink/10 bg-white/80 shadow-lg backdrop-blur transition duration-500 hover:-translate-y-1'
+            href={project.href}
+            target='_blank'
+            rel='noreferrer noopener'
+            aria-label={`View ${project.title} project (opens in a new tab)`}
+            className='group flex flex-col overflow-hidden rounded-xl border border-ink/10 bg-white/80 shadow-lg backdrop-blur transition duration-500 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink/40'
           >
             <div className='relative h-64 w-full overflow-hidden'>
               <Image
                 src={project.image}
                 alt={`${project.title} project thumbnail`}
                 fill
-                className='object-cover transition duration-500 group-hover:scale-105'
+                className='object-cover transition duration-500 group-hover:scale-105 group-focus-visible:scale-105'
               />
             </div>
             <div className='flex grow flex-col justify-between gap-3 p-6'>
@@ -113,17 +117,17 @@ export function WorkSection() {
                   {project.description}
                 </p>
               </div>
-              <a
-                href={project.href}
-                target='_blank'
-                rel='noreferrer'
-                className='inline-flex items-center gap-2 text-sm font-semibold uppercase text-ink transition hover:text-ink/70'
-              >
+              <span className='inline-flex items-center gap-2 text-sm font-semibold uppercase text-ink transition group-hover:text-ink/70 group-focus-visible:text-ink/70'>
                 View Project
-                <span aria-hidden>→</span>
-              </a>
+                <span
+                  aria-hidden
+                  className='transition-transform duration-500 group-hover:translate-x-1'
+                >
+                  →
+                </span>
+              </span>
             </div>
-          </article>
+          </a>
         ))}
       </div>
     </AnimatedSection>
