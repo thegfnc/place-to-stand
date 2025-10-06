@@ -73,27 +73,11 @@ export function ContactSection() {
           Let’s move forward together
         </h2>
         <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
-          Tell us about the investments you'd like to make and we'll follow up
-          within one business day.
+          Tell us about the investments you&apos;d like to make and we&apos;ll
+          follow up within one business day.
         </p>
       </div>
-      <div className='grid gap-10 rounded-xl border border-ink/10 bg-white/80 p-10 shadow-lg backdrop-blur md:grid-cols-[1fr_1.2fr]'>
-        <div className='flex flex-col gap-6'>
-          <h3 className='font-headline text-3xl uppercase tracking-[0.2em] text-ink'>
-            What to expect
-          </h3>
-          <ul className='space-y-4 text-base text-ink/70'>
-            <li>
-              • A quick discovery call to align on vision, scope, and success
-              metrics.
-            </li>
-            <li>• A tailored proposal with timeline, investment, and team.</li>
-            <li>
-              • Clarity on how we partner—from discovery to launch to
-              optimization.
-            </li>
-          </ul>
-        </div>
+      <div className='mx-auto w-full max-w-3xl gap-10 rounded-xl border border-ink/10 bg-white/80 p-10 shadow-lg backdrop-blur'>
         <form noValidate onSubmit={onSubmit} className='flex flex-col gap-6'>
           <div className='flex flex-col gap-2'>
             <Label htmlFor='name'>Name</Label>
