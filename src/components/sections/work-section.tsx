@@ -23,7 +23,7 @@ const projects: Project[] = [
     image:
       'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
     description:
-      'A direct-to-consumer brand focused on healthy, high-performance haircare.',
+      'A direct-to-consumer brand focused on healthy, high-performance haircare founded by Blake Lively',
   },
   {
     title: 'Heatonist',
@@ -39,7 +39,7 @@ const projects: Project[] = [
     image:
       'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1200&q=80',
     description:
-      'A clean beauty and skincare line founded by actress Millie Bobby Brown.',
+      'A clean beauty and skincare line founded by Millie Bobby Brown.',
   },
   {
     title: 'Officina del Bere 1397',

@@ -38,8 +38,10 @@ export function Header() {
     >
       <div
         className={cn(
-          'flex w-full max-w-6xl items-center justify-between rounded-full border border-white/30 py-3 pl-7 pr-4 backdrop-blur-lg transition duration-500 hover:bg-white/90',
-          scrolled ? 'bg-white/70 shadow-lg' : 'bg-white/20'
+          'flex w-full max-w-6xl items-center justify-between rounded-full border py-3 pl-7 pr-4 backdrop-blur-lg transition duration-500 hover:bg-white/90',
+          scrolled
+            ? 'border-ink/10 bg-white/70 shadow-lg'
+            : 'border-white/30 bg-white/20'
         )}
       >
         <Link href={hashHref('home')} className='flex items-center gap-3'>
