@@ -77,7 +77,7 @@ export function ContactSection() {
           follow up within one business day.
         </p>
       </div>
-      <div className='mx-auto w-full max-w-3xl gap-10 rounded-xl border border-ink/10 bg-white/80 p-10 shadow-lg backdrop-blur'>
+      <div className='mx-auto w-full max-w-2xl gap-10 rounded-xl border border-ink/10 bg-white/80 p-10 shadow-lg backdrop-blur'>
         <form noValidate onSubmit={onSubmit} className='flex flex-col gap-6'>
           <div className='flex flex-col gap-2'>
             <Label htmlFor='name'>Name</Label>

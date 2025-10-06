@@ -12,58 +12,51 @@ const projects: Project[] = [
   {
     title: 'Hot Ones',
     href: 'https://hotones.com',
-    image:
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
+    image: '/work-hot-ones.png',
     description:
       'The official online sauce shop for the hit interview show "Hot Ones.',
   },
   {
     title: 'Blake Brown Beauty',
     href: 'https://blakebrownbeauty.com',
-    image:
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
+    image: '/work-blake-brown-beauty.png',
     description:
-      'A direct-to-consumer brand focused on healthy, high-performance haircare founded by Blake Lively',
+      'A direct-to-consumer brand focused on healthy, high-performance haircare founded by Blake Lively.',
   },
   {
     title: 'Heatonist',
     href: 'https://heatonist.com',
-    image:
-      'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1200&q=80',
+    image: '/work-heatonist.png',
     description:
       "A curated marketplace for the world's best small-batch hot sauces.",
   },
   {
     title: 'Florence by Mills Beauty',
     href: 'https://florencebymillsbeauty.com',
-    image:
-      'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1200&q=80',
+    image: '/work-florence-by-mills-beauty.png',
     description:
       'A clean beauty and skincare line founded by Millie Bobby Brown.',
   },
   {
     title: '9 Point Studios',
     href: 'https://9pointstudios.com',
-    image:
-      'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
+    image: '/work-9-point-studios.png',
     description:
       'A world-class recording and video production facility for creative artists.',
   },
   {
     title: 'Officina del Bere 1397',
     href: 'https://officinadelbere1397.com',
-    image:
-      'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
+    image: '/work-officina-del-bere-1397.png',
     description:
       'A specialty shop offering elegant, functional wine and bar accessories.',
   },
   {
     title: 'The Good for Nothings Club',
     href: 'https://www.thegoodfornothings.club',
-    image:
-      'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=1200&q=80',
+    image: '/work-the-good-for-nothings-club.png',
     description:
-      'A creators club from Austin, TX for designers, filmmakers, musicians, and writers.',
+      'A creators club from Austin, TX made up of designers, engineers, filmmakers, musicians, and writers.',
   },
   {
     title: 'Lifepacks',
@@ -83,7 +76,7 @@ export function WorkSection() {
           Work
         </span>
         <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
-          Selected projects that moved the needle
+          Select projects that moved the needle
         </h2>
         <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
           A look at the product, marketing, and brand experiences we craft with
@@ -100,17 +93,17 @@ export function WorkSection() {
             aria-label={`View ${project.title} project (opens in a new tab)`}
             className='group flex flex-col overflow-hidden rounded-xl border border-ink/10 bg-white/80 shadow-lg backdrop-blur transition duration-500 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink/40'
           >
-            <div className='relative h-64 w-full overflow-hidden'>
+            <div className='relative aspect-video w-full overflow-hidden'>
               <Image
                 src={project.image}
                 alt={`${project.title} project thumbnail`}
                 fill
-                className='object-cover transition duration-500 group-hover:scale-105 group-focus-visible:scale-105'
+                className='object-cover'
               />
             </div>
             <div className='flex grow flex-col justify-between gap-3 p-6'>
               <div className='flex flex-col gap-3'>
-                <h3 className='font-headline text-2xl uppercase leading-none'>
+                <h3 className='font-headline text-2xl font-semibold uppercase leading-none'>
                   {project.title}
                 </h3>
                 <p className='text-base !leading-snug text-ink/60'>

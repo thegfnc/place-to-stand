@@ -97,10 +97,10 @@ export function Header() {
       </div>
       <div
         className={cn(
-          'absolute top-full w-full max-w-6xl px-4 transition md:hidden',
+          'absolute top-full w-full max-w-6xl px-4 transition duration-300 md:hidden',
           mobileOpen
-            ? 'pointer-events-auto opacity-100'
-            : 'pointer-events-none opacity-0'
+            ? 'pointer-events-auto translate-y-0 opacity-100'
+            : 'pointer-events-none -translate-y-4 opacity-0'
         )}
       >
         <nav
@@ -113,7 +113,7 @@ export function Header() {
             <Link
               key={item.hash}
               href={hashHref(item.hash)}
-              className='rounded-full px-6 py-3 text-base font-semibold uppercase tracking-[0.2em] text-ink/80 transition hover:bg-ink hover:text-ink-light'
+              className='rounded-full px-6 py-3 text-base font-semibold uppercase tracking-[0.2em] text-ink/80 transition'
               onClick={() => setMobileOpen(false)}
             >
               {item.label}
