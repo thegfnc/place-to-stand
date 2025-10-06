@@ -29,15 +29,15 @@ const steps = [
 
 export function HowWeWorkSection() {
   return (
-    <AnimatedSection id='how-we-work' className='flex flex-col gap-12'>
+    <AnimatedSection id='how-we-work' className='flex flex-col gap-20'>
       <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.4em] text-ink/50'>
+        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
           How we work
         </span>
-        <h2 className='font-headline text-4xl uppercase tracking-[0.1em] text-ink'>
+        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
           Our engagement playbook
         </h2>
-        <p className='max-w-2xl text-lg text-ink/70'>
+        <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
           A proven rhythm that keeps projects transparent, collaborative, and
           relentlessly focused on momentum.
         </p>
@@ -46,15 +46,17 @@ export function HowWeWorkSection() {
         {steps.map(step => (
           <li
             key={step.number}
-            className='group relative overflow-hidden rounded-3xl border border-ink/10 bg-white/80 p-8 shadow-lg backdrop-blur transition hover:-translate-y-1 hover:border-ink/20'
+            className='group relative flex flex-col gap-4 overflow-hidden rounded-xl border border-ink/10 bg-white/80 p-8 shadow-lg backdrop-blur transition duration-500 hover:-translate-y-1 hover:border-ink/20'
           >
-            <span className='text-sm font-semibold uppercase tracking-[0.3em] text-ink/50'>
+            <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/50'>
               {step.number}
             </span>
-            <h3 className='mt-2 font-headline text-3xl uppercase tracking-[0.1em] text-ink'>
+            <h3 className='font-headline text-2xl uppercase leading-none'>
               {step.title}
             </h3>
-            <p className='mt-4 text-base text-ink/70'>{step.description}</p>
+            <p className='text-base !leading-snug text-ink/60'>
+              {step.description}
+            </p>
           </li>
         ))}
       </ol>

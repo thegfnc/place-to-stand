@@ -6,11 +6,10 @@ import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
 
 const NAV_LINKS = [
-  { hash: 'about', label: 'About' },
   { hash: 'services', label: 'Services' },
+  { hash: 'work', label: 'Work' },
   { hash: 'how-we-work', label: 'How We Work' },
   { hash: 'team', label: 'Team' },
-  { hash: 'work', label: 'Work' },
   { hash: 'contact', label: 'Contact' },
 ]
 
@@ -22,7 +21,7 @@ export function Header() {
 
   useEffect(() => {
     const handler = () => {
-      setScrolled(window.scrollY > 24)
+      setScrolled(window.scrollY > 100)
     }
 
     handler()
@@ -33,22 +32,18 @@ export function Header() {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 flex justify-center px-4 transition-all',
+        'fixed inset-x-0 top-0 z-50 flex justify-center px-4 transition-all duration-500',
         scrolled ? 'py-3' : 'py-6'
       )}
     >
       <div
         className={cn(
-          'flex w-full max-w-6xl items-center justify-between rounded-full border border-white/10 px-6 py-3 backdrop-blur-md transition',
-          scrolled ? 'bg-white/70 shadow-md' : 'bg-white/40'
+          'flex w-full max-w-6xl items-center justify-between rounded-full border border-white/30 py-3 pl-7 pr-4 backdrop-blur-lg transition duration-500 hover:bg-white/90',
+          scrolled ? 'bg-white/70 shadow-lg' : 'bg-white/20'
         )}
       >
         <Link href={hashHref('home')} className='flex items-center gap-3'>
-          <span
-            className='h-9 w-9 rounded-full bg-gradientPrimary'
-            aria-hidden
-          />
-          <span className='font-logo text-xl uppercase tracking-[0.24em] text-ink'>
+          <span className='font-logo text-2xl font-semibold uppercase tracking-[0.025em] text-ink'>
             Place To Stand
           </span>
         </Link>
@@ -57,7 +52,7 @@ export function Header() {
             <Link
               key={item.hash}
               href={hashHref(item.hash)}
-              className='text-sm font-semibold uppercase tracking-[0.2em] text-ink/70 transition hover:text-ink'
+              className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/70 transition hover:text-ink'
             >
               {item.label}
             </Link>
@@ -68,7 +63,7 @@ export function Header() {
             asChild
             size='sm'
             variant='secondary'
-            className='hidden md:inline-flex'
+            className='hidden px-11 md:inline-flex'
           >
             <Link href={hashHref('contact')}>Start a Project</Link>
           </Button>
@@ -100,7 +95,7 @@ export function Header() {
       <nav
         id='mobile-nav'
         className={cn(
-          'absolute top-full mt-3 flex w-full max-w-6xl flex-col gap-2 rounded-3xl bg-white/95 p-6 text-center shadow-xl transition md:hidden',
+          'absolute top-full mt-3 flex w-full max-w-6xl flex-col gap-2 rounded-xl bg-white/95 p-6 text-center shadow-xl transition md:hidden',
           mobileOpen
             ? 'pointer-events-auto opacity-100'
             : 'pointer-events-none opacity-0'

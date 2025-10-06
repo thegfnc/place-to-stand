@@ -4,25 +4,25 @@ import { AnimatedSection } from '@/src/components/layout/animated-section'
 const team = [
   {
     name: 'Jason Desiderio',
-    title: 'Founder & Lead Strategist',
+    title: 'Principal Engineer',
     image:
       'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80',
   },
   {
-    name: 'Avery Chen',
-    title: 'Director of Design',
+    name: 'Damon Bodine',
+    title: 'Project Manager & Strategist',
     image:
       'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?auto=format&fit=crop&w=800&q=80',
   },
   {
-    name: 'Malik Ortiz',
-    title: 'Technical Director',
+    name: 'Kris Crawford',
+    title: 'AI Software Engineer',
     image:
       'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=800&q=80',
   },
   {
-    name: 'Priya Singh',
-    title: 'Head of Content',
+    name: 'Chris Donahue',
+    title: 'Copywriting & Visual Media',
     image:
       'https://images.unsplash.com/photo-1544723795-3fbced1ae214?auto=format&fit=crop&w=800&q=80',
   },
@@ -30,24 +30,24 @@ const team = [
 
 export function TeamSection() {
   return (
-    <AnimatedSection id='team' className='flex flex-col gap-12'>
+    <AnimatedSection id='team' className='flex flex-col gap-20'>
       <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.4em] text-ink/50'>
+        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
           Team
         </span>
-        <h2 className='font-headline text-4xl uppercase tracking-[0.1em] text-ink'>
+        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
           The people behind the lever
         </h2>
-        <p className='max-w-2xl text-lg text-ink/70'>
+        <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
           Strategists, storytellers, and engineers working in concert to deliver
           measurable impact.
         </p>
       </div>
-      <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+      <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-4'>
         {team.map(member => (
           <article
             key={member.name}
-            className='group flex flex-col gap-4 rounded-3xl border border-ink/10 bg-white/80 p-6 text-center shadow-lg backdrop-blur transition hover:-translate-y-1'
+            className='group flex flex-col gap-6 rounded-xl border border-ink/10 bg-white/80 p-6 text-center shadow-lg backdrop-blur transition duration-500 hover:-translate-y-1'
           >
             <div className='relative mx-auto h-40 w-40 overflow-hidden rounded-full'>
               <Image
@@ -58,12 +58,10 @@ export function TeamSection() {
               />
             </div>
             <div className='space-y-1'>
-              <h3 className='font-headline text-2xl uppercase tracking-[0.2em] text-ink'>
+              <h3 className='font-headline text-2xl uppercase leading-none'>
                 {member.name}
               </h3>
-              <p className='text-sm uppercase tracking-[0.2em] text-ink/60'>
-                {member.title}
-              </p>
+              <p className='text-sm text-ink/60'>{member.title}</p>
             </div>
           </article>
         ))}

@@ -64,20 +64,20 @@ export function ContactSection() {
   })
 
   return (
-    <AnimatedSection id='contact' className='flex flex-col gap-12'>
+    <AnimatedSection id='contact' className='flex flex-col gap-20'>
       <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.4em] text-ink/50'>
+        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
           Contact
         </span>
-        <h2 className='font-headline text-4xl uppercase tracking-[0.1em] text-ink'>
+        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
           Let’s move something together
         </h2>
-        <p className='max-w-2xl text-lg text-ink/70'>
+        <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
           Tell us about the shift you want to make. We’ll follow up within one
           business day.
         </p>
       </div>
-      <div className='grid gap-10 rounded-[40px] border border-ink/10 bg-white/80 p-10 shadow-xl backdrop-blur md:grid-cols-[1fr_1.2fr]'>
+      <div className='grid gap-10 rounded-xl border border-ink/10 bg-white/80 p-10 shadow-lg backdrop-blur md:grid-cols-[1fr_1.2fr]'>
         <div className='flex flex-col gap-6'>
           <h3 className='font-headline text-3xl uppercase tracking-[0.2em] text-ink'>
             What to expect

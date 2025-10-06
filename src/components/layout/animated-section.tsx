@@ -56,7 +56,7 @@ export function AnimatedSection({
         ref.current = node
       }}
       className={cn(
-        'mx-auto w-full max-w-6xl px-6 py-20 opacity-0 transition-all duration-700 ease-out will-change-transform',
+        'mx-auto w-full max-w-6xl px-6 py-32 opacity-0 transition-all duration-700 ease-out will-change-transform',
         visible ? 'translate-y-0 opacity-100' : 'translate-y-4',
         className
       )}
