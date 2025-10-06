@@ -135,7 +135,7 @@ export function FaqSection() {
           FAQ
         </span>
         <h2 className='max-w-4xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
-          Answers for teams ready to build momentum
+          The answers you’re looking for
         </h2>
         <p className='max-w-2xl text-balance text-lg !leading-snug text-ink/60'>
           The essentials that most clients ask us before we kick off a new

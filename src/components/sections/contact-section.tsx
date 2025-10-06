@@ -70,11 +70,11 @@ export function ContactSection() {
           Contact
         </span>
         <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
-          Let’s move the world together
+          Let’s move forward together
         </h2>
         <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
-          Tell us about the investments you want to make. We’ll follow up within
-          one business day.
+          Tell us about the investments you'd like to make and we'll follow up
+          within one business day.
         </p>
       </div>
       <div className='grid gap-10 rounded-xl border border-ink/10 bg-white/80 p-10 shadow-lg backdrop-blur md:grid-cols-[1fr_1.2fr]'>

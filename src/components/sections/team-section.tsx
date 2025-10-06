@@ -5,26 +5,22 @@ const team = [
   {
     name: 'Jason Desiderio',
     title: 'Principal Engineer',
-    image:
-      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80',
+    image: '/1652631488914.jpeg',
   },
   {
     name: 'Damon Bodine',
     title: 'Project Manager & AI Strategist',
-    image:
-      'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?auto=format&fit=crop&w=800&q=80',
+    image: '/1587649018078.jpeg',
   },
   {
     name: 'Kris Crawford',
     title: 'AI Software Engineer',
-    image:
-      'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=800&q=80',
+    image: '/259858081_219018533698595_237774923102850579_n.jpg',
   },
   {
     name: 'Chris Donahue',
     title: 'Copywriting & Visual Media',
-    image:
-      'https://images.unsplash.com/photo-1544723795-3fbced1ae214?auto=format&fit=crop&w=800&q=80',
+    image: '/403081575_325440200226266_2592020462209657049_n.jpg',
   },
 ]
 
@@ -49,7 +45,7 @@ export function TeamSection() {
             key={member.name}
             className='group flex flex-col gap-6 rounded-xl border border-ink/10 bg-white/80 p-6 text-center shadow-lg backdrop-blur transition duration-500 hover:-translate-y-1'
           >
-            <div className='relative mx-auto h-40 w-40 overflow-hidden rounded-full'>
+            <div className='relative mx-auto aspect-square w-full overflow-hidden rounded-full border border-ink/20'>
               <Image
                 src={member.image}
                 alt={`${member.name}, ${member.title}`}
