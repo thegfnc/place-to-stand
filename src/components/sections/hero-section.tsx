@@ -27,7 +27,7 @@ export function HeroSection() {
         <Button asChild size='lg'>
           <Link href={hashHref('work')}>See Our Work</Link>
         </Button>
-        <Button asChild variant='ghost' size='lg'>
+        <Button asChild variant='outline' size='lg'>
           <Link href={hashHref('contact')}>Talk With Us</Link>
         </Button>
       </div>
