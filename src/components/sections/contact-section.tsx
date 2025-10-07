@@ -124,6 +124,7 @@ export function ContactSection() {
             type='submit'
             disabled={isPending}
             className='self-start px-8'
+            size='lg'
           >
             {isPending ? 'Sending...' : 'Send Message'}
           </Button>

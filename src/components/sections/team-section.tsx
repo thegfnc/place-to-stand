@@ -19,7 +19,7 @@ const team = [
   },
   {
     name: 'Chris Donahue',
-    title: 'Copywriting & Visual Media',
+    title: 'Creative Director',
     image: '/403081575_325440200226266_2592020462209657049_n.jpg',
   },
 ]
