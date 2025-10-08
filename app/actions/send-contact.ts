@@ -2,6 +2,7 @@
 
 import { after } from 'next/server'
 import { Resend } from 'resend'
+import { checkBotId } from 'botid/server'
 import {
   contactSchema,
   type ContactFormValues,
@@ -23,6 +24,32 @@ export async function sendContact(
     return {
       success: false,
       errors: parsed.error.flatten().fieldErrors,
+    } as const
+  }
+
+  try {
+    const verification = await checkBotId({
+      advancedOptions: {
+        checkLevel: 'basic',
+      },
+    })
+
+    if (verification.isBot) {
+      console.warn('BotID blocked a contact submission attempt')
+
+      return {
+        success: false,
+        message:
+          "We couldn't verify your request. Please refresh and try again.",
+      } as const
+    }
+  } catch (error) {
+    console.error('BotID verification failed', error)
+
+    return {
+      success: false,
+      message:
+        'Unable to verify your request at this time. Please try again later.',
     } as const
   }
 
