@@ -43,7 +43,7 @@ export function TeamSection() {
         {team.map(member => (
           <article
             key={member.name}
-            className='group flex flex-col gap-6 rounded-xl border border-ink/10 bg-white/80 p-6 text-center shadow-lg backdrop-blur transition duration-500 hover:-translate-y-1'
+            className='group flex flex-col gap-6 rounded-xl border border-ink/10 bg-white/80 p-6 text-center shadow-md backdrop-blur transition duration-500 hover:-translate-y-1 hover:shadow-xl'
           >
             <div className='relative mx-auto aspect-square w-full overflow-hidden rounded-full border border-ink/20'>
               <Image

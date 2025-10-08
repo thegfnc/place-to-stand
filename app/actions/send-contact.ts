@@ -172,7 +172,7 @@ export async function sendContact(
       const emailLines = [...detailLines]
 
       if (asanaTaskLink) {
-        emailLines.push(`Asana Task: ${asanaTaskLink}`)
+        emailLines.push(`\nAsana Task: ${asanaTaskLink}`)
       }
 
       await resend.emails.send({

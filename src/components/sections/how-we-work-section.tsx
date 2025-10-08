@@ -46,7 +46,7 @@ export function HowWeWorkSection() {
         {steps.map(step => (
           <li
             key={step.number}
-            className='group relative flex flex-col gap-4 overflow-hidden rounded-xl border border-ink/10 bg-white/80 p-8 shadow-lg backdrop-blur transition duration-500 hover:-translate-y-1 hover:border-ink/20'
+            className='group relative flex flex-col gap-4 overflow-hidden rounded-xl border border-ink/10 bg-white/80 p-8 shadow-md backdrop-blur transition duration-500 hover:-translate-y-1 hover:border-ink/20 hover:shadow-xl'
           >
             <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/50'>
               {step.number}

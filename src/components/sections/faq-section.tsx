@@ -82,7 +82,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
     <div
       className={cn(
         'mx-auto max-w-4xl overflow-hidden rounded-xl border border-ink/10 bg-white/80 shadow-sm transition-all duration-300 ease-out hover:border-ink/60',
-        isOpen ? 'border-ink/10 shadow-lg' : ''
+        isOpen ? 'border-ink/10 shadow-md' : ''
       )}
     >
       <button

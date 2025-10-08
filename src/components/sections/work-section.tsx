@@ -91,7 +91,7 @@ export function WorkSection() {
             target='_blank'
             rel='noreferrer noopener'
             aria-label={`View ${project.title} project (opens in a new tab)`}
-            className='group flex flex-col overflow-hidden rounded-xl border border-ink/10 bg-white/80 shadow-lg backdrop-blur transition duration-500 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink/40'
+            className='group flex flex-col overflow-hidden rounded-xl border border-ink/10 bg-white/80 shadow-md backdrop-blur transition duration-500 hover:-translate-y-1 hover:shadow-xl focus-visible:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink/40'
           >
             <div className='relative aspect-video w-full overflow-hidden'>
               <Image

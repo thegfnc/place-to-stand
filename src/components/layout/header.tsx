@@ -41,7 +41,7 @@ export function Header() {
         className={cn(
           'flex w-full max-w-6xl items-center justify-between rounded-full border py-3 pl-7 pr-4 backdrop-blur-lg transition duration-500 hover:bg-white/90',
           scrolled
-            ? 'border-ink/10 bg-white/70 shadow-lg'
+            ? 'border-ink/10 bg-white/70 shadow-md'
             : 'border-white/30 bg-white/20'
         )}
       >
