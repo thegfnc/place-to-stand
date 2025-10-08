@@ -65,6 +65,8 @@ export async function sendContact(
       const lastName = restOfName.join(' ').trim()
       const trimmedCompany = company?.trim()
       const trimmedWebsite = website?.trim()
+      const trimmedMessage = message.trim()
+      const greetingName = firstName || trimmedName || 'there'
 
       const detailLines = [`Name: ${name}`, `Email: ${email}`]
 
@@ -76,7 +78,39 @@ export async function sendContact(
         detailLines.push(`Website: ${trimmedWebsite}`)
       }
 
-      detailLines.push(`Message: ${message}`)
+      if (trimmedMessage) {
+        detailLines.push('', 'Message:', ...trimmedMessage.split(/\r?\n/))
+      }
+
+      const clientEmailLines = [
+        `Hi ${greetingName},`,
+        '',
+        "Thanks for reaching out to Place To Stand. Here's a quick summary of what you shared:",
+        '',
+        `Name: ${name}`,
+        `Email: ${email}`,
+      ]
+
+      if (trimmedCompany) {
+        clientEmailLines.push(`Company: ${trimmedCompany}`)
+      }
+
+      if (trimmedWebsite) {
+        clientEmailLines.push(`Website: ${trimmedWebsite}`)
+      }
+
+      if (trimmedMessage) {
+        clientEmailLines.push('', 'Message:')
+        clientEmailLines.push(...trimmedMessage.split(/\r?\n/))
+      }
+
+      clientEmailLines.push(
+        '',
+        "We'll get back to you within one business day. If you need to add anything in the meantime, please reach out to hello@placetostandagency.com.",
+        '',
+        'Talk soon,',
+        'The Place To Stand Team'
+      )
 
       const contactPayload: {
         email: string
@@ -184,6 +218,14 @@ export async function sendContact(
         ],
         subject: `New inquiry from ${name}`,
         text: emailLines.join('\n'),
+      })
+
+      await resend.emails.send({
+        from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
+        to: [email],
+        replyTo: 'hello@placetostandagency.com',
+        subject: 'Thanks for contacting Place To Stand',
+        text: clientEmailLines.join('\n'),
       })
     } catch (error) {
       console.error('Contact background job failed', error)
