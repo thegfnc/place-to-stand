@@ -5,6 +5,8 @@ import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { cn } from '@/src/lib/utils'
 import { Toaster } from '@/src/components/ui/use-toast'
+import { Header } from '@/src/components/layout/header'
+import { Footer } from '@/src/components/layout/footer'
 
 const afacad = Afacad({
   subsets: ['latin'],
@@ -61,7 +63,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           sourceSans.variable
         )}
       >
-        {children}
+        <div className='relative flex min-h-screen flex-col bg-ink-light'>
+          <Header />
+          {children}
+          <Footer />
+        </div>
         <Toaster />
         <Analytics />
       </body>
