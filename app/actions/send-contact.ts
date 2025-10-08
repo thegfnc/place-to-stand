@@ -36,8 +36,12 @@ export async function sendContact(
   try {
     const resend = new Resend(apiKey)
     await resend.emails.send({
-      from: 'Place To Stand <hello@placetostandagency.com>',
-      to: ['hello@placetostandagency.com'],
+      from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
+      to: [
+        'hello@placetostandagency.com',
+        'damon@placetostandagency.com',
+        'jason@placetostandagency.com',
+      ],
       subject: `New inquiry from ${parsed.data.name}`,
       text: `Name: ${parsed.data.name}\nEmail: ${parsed.data.email}\nMessage: ${parsed.data.message}`,
     })
