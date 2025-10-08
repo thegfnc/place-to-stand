@@ -77,7 +77,7 @@ pnpm dev
 Environment variables:
 
 - `RESEND_API_KEY` — required for contact form submission
-- `RESEND_AUDIENCE_ID` — optional; defaults to `469b29de-2269-47c7-81c6-6a294e181e14` for lead capture
+- `RESEND_AUDIENCE_ID` — required; Resend audience that stores new leads
 - `ASANA_ACCESS_TOKEN` — required; personal access token with permission to create tasks
 - `ASANA_WORKSPACE_GID` — required; workspace that owns the leads board
 - `ASANA_PROJECT_GID` — required; project (leads board) to receive new tasks

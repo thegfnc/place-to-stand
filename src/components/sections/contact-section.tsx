@@ -1,6 +1,6 @@
 'use client'
 
-import { useTransition } from 'react'
+import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -21,6 +21,7 @@ import {
 
 export function ContactSection() {
   const [isPending, startTransition] = useTransition()
+  const [isSuccess, setIsSuccess] = useState(false)
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -54,11 +55,8 @@ export function ContactSection() {
           return
         }
 
-        toast({
-          title: 'Thank you!',
-          description: 'Your message has been sent.',
-        })
         form.reset()
+        setIsSuccess(true)
       })
     })
   })
@@ -78,57 +76,80 @@ export function ContactSection() {
         </p>
       </div>
       <div className='mx-auto w-full max-w-2xl gap-10 rounded-xl border border-ink/10 bg-white/80 p-10 shadow-lg backdrop-blur'>
-        <form noValidate onSubmit={onSubmit} className='flex flex-col gap-6'>
-          <div className='flex flex-col gap-2'>
-            <Label htmlFor='name'>Name</Label>
-            <Input
-              id='name'
-              {...form.register('name')}
-              aria-invalid={!!form.formState.errors.name}
-            />
-            {form.formState.errors.name ? (
-              <p className='text-sm text-red-600'>
-                {form.formState.errors.name.message}
-              </p>
-            ) : null}
+        {isSuccess ? (
+          <div className='flex flex-col items-center gap-6 text-center'>
+            <h3 className='text-2xl font-semibold uppercase text-ink'>
+              Thank you!
+            </h3>
+            <p className='max-w-md text-balance text-base text-ink/70'>
+              Your message has been sent. We&apos;ll reach out within one
+              business day.
+            </p>
+            <Button
+              type='button'
+              size='lg'
+              className='px-8'
+              onClick={() => {
+                form.reset()
+                setIsSuccess(false)
+              }}
+            >
+              Send another message
+            </Button>
           </div>
-          <div className='flex flex-col gap-2'>
-            <Label htmlFor='email'>Email</Label>
-            <Input
-              id='email'
-              type='email'
-              {...form.register('email')}
-              aria-invalid={!!form.formState.errors.email}
-            />
-            {form.formState.errors.email ? (
-              <p className='text-sm text-red-600'>
-                {form.formState.errors.email.message}
-              </p>
-            ) : null}
-          </div>
-          <div className='flex flex-col gap-2'>
-            <Label htmlFor='message'>Message</Label>
-            <Textarea
-              id='message'
-              rows={5}
-              {...form.register('message')}
-              aria-invalid={!!form.formState.errors.message}
-            />
-            {form.formState.errors.message ? (
-              <p className='text-sm text-red-600'>
-                {form.formState.errors.message.message}
-              </p>
-            ) : null}
-          </div>
-          <Button
-            type='submit'
-            disabled={isPending}
-            className='self-start px-8'
-            size='lg'
-          >
-            {isPending ? 'Sending...' : 'Send Message'}
-          </Button>
-        </form>
+        ) : (
+          <form noValidate onSubmit={onSubmit} className='flex flex-col gap-6'>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='name'>Name</Label>
+              <Input
+                id='name'
+                {...form.register('name')}
+                aria-invalid={!!form.formState.errors.name}
+              />
+              {form.formState.errors.name ? (
+                <p className='text-sm text-red-600'>
+                  {form.formState.errors.name.message}
+                </p>
+              ) : null}
+            </div>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='email'>Email</Label>
+              <Input
+                id='email'
+                type='email'
+                {...form.register('email')}
+                aria-invalid={!!form.formState.errors.email}
+              />
+              {form.formState.errors.email ? (
+                <p className='text-sm text-red-600'>
+                  {form.formState.errors.email.message}
+                </p>
+              ) : null}
+            </div>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='message'>Message</Label>
+              <Textarea
+                id='message'
+                rows={5}
+                {...form.register('message')}
+                aria-invalid={!!form.formState.errors.message}
+              />
+              {form.formState.errors.message ? (
+                <p className='text-sm text-red-600'>
+                  {form.formState.errors.message.message}
+                </p>
+              ) : null}
+            </div>
+            <Button
+              type='submit'
+              disabled={isPending}
+              className='self-start px-8'
+              size='lg'
+            >
+              {isPending ? 'Sending...' : 'Send Message'}
+            </Button>
+          </form>
+        )}
       </div>
     </AnimatedSection>
   )
