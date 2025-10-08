@@ -20,13 +20,13 @@ Place To Stand is a single-page brochure site for a boutique digital agency. The
 
 ## Tech Stack
 
-| Concern | Tooling |
-| --- | --- |
-| Framework | Next.js (App Router, TypeScript) |
-| Styling | Tailwind CSS + shadcn/ui |
-| Forms & Validation | React Hook Form + Zod |
-| Email Delivery | Resend |
-| Analytics | Vercel Analytics |
+| Concern              | Tooling                                                                                      |
+| -------------------- | -------------------------------------------------------------------------------------------- |
+| Framework            | Next.js (App Router, TypeScript)                                                             |
+| Styling              | Tailwind CSS + shadcn/ui                                                                     |
+| Forms & Validation   | React Hook Form + Zod                                                                        |
+| Email Delivery       | Resend                                                                                       |
+| Analytics            | Vercel Analytics                                                                             |
 | Linting & Formatting | ESLint (`eslint-config-next`, `eslint-plugin-react`, `eslint-plugin-react-hooks`) + Prettier |
 
 ## Design & Brand Highlights
@@ -40,16 +40,16 @@ Place To Stand is a single-page brochure site for a boutique digital agency. The
 
 Single-page layout with sticky header navigation that smooth-scrolls to each section ID.
 
-| Section ID | Purpose |
-| --- | --- |
-| `#home` | Hero headline, tagline, primary CTA (“See Our Work”) -> `#work` |
-| `#about` | Agency story + philosophy |
-| `#services` | Grid of shadcn UI Cards with service icon, title, description |
-| `#how-we-work` | Numbered 4-step process |
-| `#team` | Team card grid (photo, name, title) |
-| `#work` | Portfolio thumbnails + titles |
-| `#contact` | Contact form (name, email, message) with validation + Resend submission |
-| Footer | Copyright, legal links, socials |
+| Section ID     | Purpose                                                                 |
+| -------------- | ----------------------------------------------------------------------- |
+| `#home`        | Hero headline, tagline, primary CTA (“See Our Work”) -> `#work`         |
+| `#about`       | Agency story + philosophy                                               |
+| `#services`    | Grid of shadcn UI Cards with service icon, title, description           |
+| `#how-we-work` | Numbered 4-step process                                                 |
+| `#team`        | Team card grid (photo, name, title)                                     |
+| `#work`        | Portfolio thumbnails + titles                                           |
+| `#contact`     | Contact form (name, email, message) with validation + Resend submission |
+| Footer         | Copyright, legal links, socials                                         |
 
 ## Repo Structure
 
@@ -77,6 +77,11 @@ pnpm dev
 Environment variables:
 
 - `RESEND_API_KEY` — required for contact form submission
+- `RESEND_AUDIENCE_ID` — optional; defaults to `469b29de-2269-47c7-81c6-6a294e181e14` for lead capture
+- `ASANA_ACCESS_TOKEN` — required; personal access token with permission to create tasks
+- `ASANA_WORKSPACE_GID` — required; workspace that owns the leads board
+- `ASANA_PROJECT_GID` — required; project (leads board) to receive new tasks
+- `ASANA_SECTION_GID` — optional; board column for new tasks
 - `NEXT_PUBLIC_VERCEL_ANALYTICS_ID` — optional if using Vercel Analytics locally
 
 ## Development Workflow
@@ -84,9 +89,9 @@ Environment variables:
 1. Branch from `main` with `feat/<short-description>` naming.
 2. Implement changes alongside unit/visual coverage when applicable.
 3. Run quality gates:
-	 - `pnpm lint`
-	 - `pnpm test` (if tests exist)
-	 - `pnpm type-check`
+   - `npm run lint`
+   - `npm run test` (if tests exist)
+   - `npm run type-check`
 4. Submit a PR referencing relevant spec sections.
 
 ## Section Contracts
@@ -101,9 +106,9 @@ Each section component should expose a simple contract:
 
 - Use React Hook Form with Zod resolver.
 - Schema:
-	- `name`: string, min 2 characters
-	- `email`: string, valid email
-	- `message`: string, min 10 characters
+  - `name`: string, min 2 characters
+  - `email`: string, valid email
+  - `message`: string, min 10 characters
 - Inline error text in red under each field.
 - Loading state on submission.
 - Toast notifications: success (“Thank you! Your message has been sent.”) and failure (“Something went wrong. Please try again.”)
