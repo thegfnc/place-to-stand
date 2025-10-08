@@ -108,6 +108,8 @@ Each section component should expose a simple contract:
 - Schema:
   - `name`: string, min 2 characters
   - `email`: string, valid email
+  - `company`: optional string, max 256 characters
+  - `website`: optional URL
   - `message`: string, min 10 characters
 - Inline error text in red under each field.
 - Loading state on submission.

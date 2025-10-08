@@ -54,25 +54,29 @@ export async function sendContact(
     } as const
   }
 
-  const { name, email, message } = parsed.data
+  const { name, email, message, company, website } = parsed.data
 
   after(async () => {
     try {
       const resend = new Resend(apiKey)
-      await resend.emails.send({
-        from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
-        to: [
-          'hello@placetostandagency.com',
-          'damon@placetostandagency.com',
-          'jason@placetostandagency.com',
-        ],
-        subject: `New inquiry from ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-      })
 
       const trimmedName = name.trim()
       const [firstName, ...restOfName] = trimmedName.split(/\s+/)
       const lastName = restOfName.join(' ').trim()
+      const trimmedCompany = company?.trim()
+      const trimmedWebsite = website?.trim()
+
+      const detailLines = [`Name: ${name}`, `Email: ${email}`]
+
+      if (trimmedCompany) {
+        detailLines.push(`Company: ${trimmedCompany}`)
+      }
+
+      if (trimmedWebsite) {
+        detailLines.push(`Website: ${trimmedWebsite}`)
+      }
+
+      detailLines.push(`Message: ${message}`)
 
       const contactPayload: {
         email: string
@@ -120,7 +124,7 @@ export async function sendContact(
       } = {
         data: {
           name: `New lead: ${name}`,
-          notes: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+          notes: detailLines.join('\n'),
           workspace: asanaWorkspaceGid,
           projects: [asanaProjectGid],
         },
@@ -151,6 +155,36 @@ export async function sendContact(
 
         throw new Error('Failed to create a lead task. Please try again later.')
       }
+
+      const asanaResult = (await asanaResponse.json()) as {
+        data?: {
+          gid?: string
+          permalink_url?: string
+        }
+      }
+
+      const asanaTaskLink =
+        asanaResult?.data?.permalink_url ??
+        (asanaResult?.data?.gid
+          ? `https://app.asana.com/0/${asanaProjectGid}/${asanaResult.data.gid}`
+          : undefined)
+
+      const emailLines = [...detailLines]
+
+      if (asanaTaskLink) {
+        emailLines.push(`Asana Task: ${asanaTaskLink}`)
+      }
+
+      await resend.emails.send({
+        from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
+        to: [
+          'hello@placetostandagency.com',
+          'damon@placetostandagency.com',
+          'jason@placetostandagency.com',
+        ],
+        subject: `New inquiry from ${name}`,
+        text: emailLines.join('\n'),
+      })
     } catch (error) {
       console.error('Contact background job failed', error)
     }
