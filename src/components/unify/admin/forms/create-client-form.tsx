@@ -1,28 +1,94 @@
 'use client'
 
-import { useEffect, useRef, useActionState } from 'react'
+import { useEffect, useMemo, useRef, useActionState } from 'react'
 import { createClient } from '@/app/(unify)/unify/actions/create-client'
+import { updateClient } from '@/app/(unify)/unify/actions/update-client'
+import { CLIENT_STATUSES } from '@/src/lib/unify/constants'
 import { Input } from '@/src/components/ui/input'
 import { Label } from '@/src/components/ui/label'
 import { Textarea } from '@/src/components/ui/textarea'
 import { SubmitButton } from '@/src/components/unify/shared/submit-button'
 import { initialActionState } from '@/src/lib/unify/types'
 
-export function CreateClientForm() {
+type ClientStatusId = (typeof CLIENT_STATUSES)[number]['id']
+
+type ClientFormMode = 'create' | 'edit'
+
+interface ClientFormValues {
+  id?: string
+  name?: string
+  status?: ClientStatusId
+  notes?: string | null
+}
+
+interface ClientFormProps {
+  mode?: ClientFormMode
+  defaultValues?: ClientFormValues
+  onSuccess?: () => void
+  submitLabel?: string
+}
+
+export function ClientForm({
+  mode = 'create',
+  defaultValues,
+  onSuccess,
+  submitLabel,
+}: ClientFormProps) {
   const formRef = useRef<HTMLFormElement>(null)
-  const [state, formAction] = useActionState(createClient, initialActionState)
+  const action = mode === 'create' ? createClient : updateClient
+  const [state, formAction] = useActionState(action, initialActionState)
+
+  const statusOptions = useMemo(() => CLIENT_STATUSES, [])
+  const initialStatus =
+    defaultValues?.status ?? statusOptions[0]?.id ?? 'active'
 
   useEffect(() => {
     if (state.status === 'success') {
-      formRef.current?.reset()
+      if (mode === 'create') {
+        formRef.current?.reset()
+      }
+      onSuccess?.()
     }
-  }, [state.status])
+  }, [state.status, mode, onSuccess])
+
+  if (mode === 'edit' && !defaultValues?.id) {
+    throw new Error('ClientForm in edit mode requires an id in defaultValues')
+  }
 
   return (
-    <form ref={formRef} action={formAction} className='space-y-4'>
+    <form
+      key={defaultValues?.id ?? 'client-form'}
+      ref={formRef}
+      action={formAction}
+      className='space-y-4'
+    >
+      {mode === 'edit' && defaultValues?.id ? (
+        <input type='hidden' name='clientId' value={defaultValues.id} />
+      ) : null}
       <div className='space-y-2'>
         <Label htmlFor='client-name'>Client Name</Label>
-        <Input id='client-name' name='name' placeholder='Acme Corp' required />
+        <Input
+          id='client-name'
+          name='name'
+          defaultValue={defaultValues?.name ?? ''}
+          placeholder='Acme Corp'
+          required
+        />
+      </div>
+      <div className='space-y-2'>
+        <Label htmlFor='client-status'>Status</Label>
+        <select
+          id='client-status'
+          name='status'
+          defaultValue={initialStatus}
+          className='w-full rounded-md border border-slate-700 bg-slate-900/60 px-3 py-2 text-xs uppercase tracking-[0.3em] text-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400'
+        >
+          {statusOptions.map(option => (
+            <option key={option.id} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
       <div className='space-y-2'>
         <Label htmlFor='client-notes'>Notes</Label>
@@ -31,19 +97,26 @@ export function CreateClientForm() {
           name='notes'
           placeholder='Internal context or billing details'
           rows={3}
+          defaultValue={defaultValues?.notes ?? ''}
         />
       </div>
-      {state.status === 'error' && (
+      {state.status === 'error' && state.message && (
         <p className='rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-xs text-red-200'>
           {state.message}
         </p>
       )}
-      {state.status === 'success' && (
+      {state.status === 'success' && state.message && mode === 'create' && (
         <p className='rounded-md border border-emerald-500/20 bg-emerald-500/10 px-3 py-2 text-xs text-emerald-200'>
           {state.message}
         </p>
       )}
-      <SubmitButton className='w-full'>Create client</SubmitButton>
+      <SubmitButton className='w-full'>
+        {submitLabel ?? (mode === 'create' ? 'Create client' : 'Save changes')}
+      </SubmitButton>
     </form>
   )
+}
+
+export function CreateClientForm(props: Omit<ClientFormProps, 'mode'>) {
+  return <ClientForm mode='create' {...props} />
 }

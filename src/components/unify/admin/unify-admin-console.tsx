@@ -13,7 +13,10 @@ import { format } from 'date-fns'
 interface AdminConsoleProps {
   clients: Array<Pick<ClientsRow, 'id' | 'name' | 'status' | 'created_at'>>
   projects: Array<
-    Pick<ProjectsRow, 'id' | 'name' | 'status' | 'budget_hours'> & {
+    Pick<
+      ProjectsRow,
+      'id' | 'name' | 'status' | 'budget_hours' | 'client_id'
+    > & {
       clientName: string
       purchasedHours: number
       loggedHours: number
@@ -110,7 +113,12 @@ export function UnifyAdminConsole({
         description='Track retainers and hour blocks for each project.'
       >
         <AddHourBlockForm
-          projects={projects.map(({ id, name }) => ({ id, name }))}
+          projects={projects.map(({ id, name, client_id, clientName }) => ({
+            id,
+            name,
+            client_id,
+            client_name: clientName,
+          }))}
         />
       </UnifyPanel>
 

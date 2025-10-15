@@ -1,7 +1,9 @@
 import { createSupabaseServerClient } from '@/src/lib/supabase/clients'
-import { CreateClientForm } from '@/src/components/unify/admin/forms/create-client-form'
 import { UnifyPanel } from '@/src/components/unify/shared/panel'
-import { ClientsTable } from '@/src/components/unify/settings/clients-table'
+import {
+  ClientsAddButton,
+  ClientsTable,
+} from '@/src/components/unify/settings/clients-table'
 import type { ClientsRow, ProjectsRow } from '@/src/lib/supabase/types'
 
 export default async function SettingsClientsPage() {
@@ -54,8 +56,12 @@ export default async function SettingsClientsPage() {
       <UnifyPanel
         title='Create a client'
         description='Stand up a new client record with optional internal notes.'
+        actions={<ClientsAddButton />}
       >
-        <CreateClientForm />
+        <p className='text-sm text-slate-400'>
+          Use the add client dialog to capture new partners without leaving this
+          view.
+        </p>
       </UnifyPanel>
 
       <UnifyPanel

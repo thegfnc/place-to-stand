@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { requireProfile } from '@/src/lib/auth/session'
 import { createSupabaseServerClient } from '@/src/lib/supabase/clients'
+import type { ActionState } from '@/src/lib/unify/types'
 
 const schema = z.object({
   profileId: z.string().uuid('Missing profile id'),
@@ -11,7 +12,10 @@ const schema = z.object({
   role: z.enum(['admin', 'worker', 'client']),
 })
 
-export async function updateProfile(formData: FormData) {
+export async function updateProfile(
+  _prevState: ActionState,
+  formData: FormData
+): Promise<ActionState> {
   const currentProfile = await requireProfile(['admin'])
 
   const supabase = await createSupabaseServerClient()
@@ -19,7 +23,14 @@ export async function updateProfile(formData: FormData) {
 
   if (!parsed.success) {
     console.error('Invalid profile update payload', parsed.error.flatten())
-    return
+    const { fieldErrors } = parsed.error.flatten()
+    return {
+      status: 'error',
+      message:
+        fieldErrors.fullName?.[0] ??
+        fieldErrors.role?.[0] ??
+        'Invalid profile payload',
+    }
   }
 
   const { profileId, fullName, role } = parsed.data
@@ -34,7 +45,10 @@ export async function updateProfile(formData: FormData) {
 
   if (error) {
     console.error('Failed to update profile', error)
-    return
+    return {
+      status: 'error',
+      message: error.message,
+    }
   }
 
   if (currentProfile.id === profileId) {
@@ -43,4 +57,8 @@ export async function updateProfile(formData: FormData) {
 
   revalidatePath('/unify/clients')
   revalidatePath('/unify/settings/team')
+  return {
+    status: 'success',
+    message: 'Team member updated successfully',
+  }
 }

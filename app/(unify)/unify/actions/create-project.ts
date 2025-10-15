@@ -4,11 +4,18 @@ import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { requireProfile } from '@/src/lib/auth/session'
 import { createSupabaseServerClient } from '@/src/lib/supabase/clients'
+import { PROJECT_STATUSES } from '@/src/lib/unify/constants'
 import type { ActionState } from '@/src/lib/unify/types'
 
 const schema = z.object({
   clientId: z.string().uuid('Select a client'),
   name: z.string().min(2, 'Project name must be at least 2 characters'),
+  status: z.enum(
+    PROJECT_STATUSES.map(status => status.id) as [
+      (typeof PROJECT_STATUSES)[number]['id'],
+      ...(typeof PROJECT_STATUSES)[number]['id'][],
+    ]
+  ),
   code: z.string().max(16).optional(),
   summary: z.string().optional(),
   budgetHours: z
@@ -35,11 +42,12 @@ export async function createProject(
     }
   }
 
-  const { clientId, name, code, summary, budgetHours } = parsed.data
+  const { clientId, name, status, code, summary, budgetHours } = parsed.data
 
   const { error } = await supabase.from('projects').insert({
     client_id: clientId,
     name,
+    status,
     code: code?.trim() || null,
     summary: summary?.trim() || null,
     budget_hours: budgetHours ?? null,
@@ -55,6 +63,8 @@ export async function createProject(
   }
 
   revalidatePath('/unify')
+  revalidatePath('/unify/settings/projects')
+  revalidatePath('/unify/settings/hours')
 
   return {
     status: 'success',

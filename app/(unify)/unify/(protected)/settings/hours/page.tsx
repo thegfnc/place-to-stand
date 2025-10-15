@@ -1,14 +1,19 @@
 import { createSupabaseServerClient } from '@/src/lib/supabase/clients'
 import { UnifyPanel } from '@/src/components/unify/shared/panel'
-import { AddHourBlockForm } from '@/src/components/unify/admin/forms/add-hour-block-form'
-import { HourBlocksTable } from '@/src/components/unify/settings/hour-blocks-table'
+import {
+  HourBlocksAddButton,
+  HourBlocksTable,
+} from '@/src/components/unify/settings/hour-blocks-table'
 import type { ProjectsRow, ProjectHourBlockRow } from '@/src/lib/supabase/types'
 
 export default async function SettingsHoursPage() {
   const supabase = await createSupabaseServerClient()
 
   const [projectsResponse, hourBlocksResponse] = await Promise.all([
-    supabase.from('projects').select('id, name').order('name'),
+    supabase
+      .from('projects')
+      .select('id, name, client_id, client:clients ( id, name )')
+      .order('name'),
     supabase
       .from('project_hour_blocks')
       .select(
@@ -33,8 +38,17 @@ export default async function SettingsHoursPage() {
   }
 
   const projects = (projectsResponse.data ?? []) as Array<
-    Pick<ProjectsRow, 'id' | 'name'>
+    Pick<ProjectsRow, 'id' | 'name' | 'client_id'> & {
+      client?: { id: string; name: string } | null
+    }
   >
+
+  const projectOptions = projects.map(project => ({
+    id: project.id,
+    name: project.name,
+    client_id: project.client_id,
+    client_name: project.client?.name ?? undefined,
+  }))
 
   const hourBlocks = (hourBlocksResponse.data ?? []) as Array<
     Pick<
@@ -82,15 +96,19 @@ export default async function SettingsHoursPage() {
       <UnifyPanel
         title='Record purchased hours'
         description='Log retainers or budget adjustments against a project.'
+        actions={<HourBlocksAddButton projects={projectOptions} />}
       >
-        <AddHourBlockForm projects={projects} />
+        <p className='text-sm text-slate-400'>
+          Use the add hours dialog to capture retainer updates across your
+          client portfolio.
+        </p>
       </UnifyPanel>
 
       <UnifyPanel
         title='Hour blocks ledger'
         description='Adjust or retire hour blocks as retainers evolve.'
       >
-        <HourBlocksTable hourBlocks={tableData} />
+        <HourBlocksTable hourBlocks={tableData} projects={projectOptions} />
       </UnifyPanel>
     </div>
   )

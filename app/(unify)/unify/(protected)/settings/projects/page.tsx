@@ -1,7 +1,9 @@
 import { createSupabaseServerClient } from '@/src/lib/supabase/clients'
-import { CreateProjectForm } from '@/src/components/unify/admin/forms/create-project-form'
 import { UnifyPanel } from '@/src/components/unify/shared/panel'
-import { ProjectsTable } from '@/src/components/unify/settings/projects-table'
+import {
+  ProjectsAddButton,
+  ProjectsTable,
+} from '@/src/components/unify/settings/projects-table'
 import type {
   ClientsRow,
   ProjectsRow,
@@ -141,8 +143,12 @@ export default async function SettingsProjectsPage() {
       <UnifyPanel
         title='Create a project'
         description='Spin up a project tied to an existing client and optional budget.'
+        actions={<ProjectsAddButton clients={clientOptions} />}
       >
-        <CreateProjectForm clients={clientOptions} />
+        <p className='text-sm text-slate-400'>
+          Launch the add project dialog to create new workstreams with budgets
+          and status defaults.
+        </p>
       </UnifyPanel>
 
       <UnifyPanel

@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { requireProfile } from '@/src/lib/auth/session'
 import { createSupabaseServerClient } from '@/src/lib/supabase/clients'
+import type { ActionState } from '@/src/lib/unify/types'
 
 const schema = z.object({
   projectId: z.string().uuid('Missing project id'),
@@ -19,7 +20,10 @@ const schema = z.object({
     .pipe(z.number().nullable()),
 })
 
-export async function updateProject(formData: FormData) {
+export async function updateProject(
+  _prevState: ActionState,
+  formData: FormData
+): Promise<ActionState> {
   await requireProfile(['admin'])
 
   const supabase = await createSupabaseServerClient()
@@ -27,7 +31,15 @@ export async function updateProject(formData: FormData) {
 
   if (!parsed.success) {
     console.error('Invalid project update payload', parsed.error.flatten())
-    return
+    const { fieldErrors } = parsed.error.flatten()
+    return {
+      status: 'error',
+      message:
+        fieldErrors.name?.[0] ??
+        fieldErrors.clientId?.[0] ??
+        fieldErrors.status?.[0] ??
+        'Invalid project payload',
+    }
   }
 
   const { projectId, clientId, name, status, summary, code, budgetHours } =
@@ -47,7 +59,10 @@ export async function updateProject(formData: FormData) {
 
   if (error) {
     console.error('Failed to update project', error)
-    return
+    return {
+      status: 'error',
+      message: error.message,
+    }
   }
 
   revalidatePath('/unify/clients')
@@ -55,4 +70,8 @@ export async function updateProject(formData: FormData) {
   revalidatePath(`/unify/clients/${clientId}/projects/${projectId}`)
   revalidatePath('/unify/settings/projects')
   revalidatePath('/unify/settings/hours')
+  return {
+    status: 'success',
+    message: 'Project updated successfully',
+  }
 }

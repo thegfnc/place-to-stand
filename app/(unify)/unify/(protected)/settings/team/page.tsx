@@ -1,8 +1,8 @@
 import { requireProfile } from '@/src/lib/auth/session'
 import { createSupabaseServerClient } from '@/src/lib/supabase/clients'
 import { UnifyPanel } from '@/src/components/unify/shared/panel'
-import { InviteUserForm } from '@/src/components/unify/admin/forms/invite-user-form'
 import { TeamTable } from '@/src/components/unify/settings/team-table'
+import { TeamAddButton } from '@/src/components/unify/settings/team-table'
 import type { ProfilesRow } from '@/src/lib/supabase/types'
 
 export default async function SettingsTeamPage() {
@@ -40,8 +40,12 @@ export default async function SettingsTeamPage() {
       <UnifyPanel
         title='Invite a teammate'
         description='Provision access for internal staff, contractors, or clients.'
+        actions={<TeamAddButton />}
       >
-        <InviteUserForm />
+        <p className='text-sm text-slate-400'>
+          Use the invite teammate dialog to send a new account invite with a
+          temporary password.
+        </p>
       </UnifyPanel>
 
       <UnifyPanel
