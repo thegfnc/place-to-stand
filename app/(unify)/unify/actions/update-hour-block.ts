@@ -25,7 +25,9 @@ export async function updateHourBlock(
 ): Promise<ActionState> {
   await requireProfile(['admin'])
 
-  const supabase = await createSupabaseServerClient()
+  const supabase = await createSupabaseServerClient({
+    allowCookieWrite: true,
+  })
   const parsed = schema.safeParse(Object.fromEntries(formData.entries()))
 
   if (!parsed.success) {

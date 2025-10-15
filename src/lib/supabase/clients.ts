@@ -34,8 +34,15 @@ export function createSupabaseServiceRoleClient() {
   )
 }
 
-export async function createSupabaseServerClient() {
+type ServerClientOptions = {
+  allowCookieWrite?: boolean
+}
+
+export async function createSupabaseServerClient(
+  options?: ServerClientOptions
+) {
   const cookieStore = await cookies()
+  const allowCookieWrite = options?.allowCookieWrite ?? false
 
   return createServerClient<Database>(
     ensureEnv('NEXT_PUBLIC_SUPABASE_URL', supabaseUrl),
@@ -46,6 +53,10 @@ export async function createSupabaseServerClient() {
           return cookieStore.get(name)?.value
         },
         set(name: string, value: string, options: CookieOptions) {
+          if (!allowCookieWrite) {
+            return
+          }
+
           try {
             cookieStore.set(name, value, options)
           } catch (error) {
@@ -55,6 +66,10 @@ export async function createSupabaseServerClient() {
           }
         },
         remove(name: string, options: CookieOptions) {
+          if (!allowCookieWrite) {
+            return
+          }
+
           try {
             cookieStore.set(name, '', { ...options, maxAge: 0 })
           } catch (error) {

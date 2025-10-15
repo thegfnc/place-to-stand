@@ -13,7 +13,9 @@ export type DeleteTaskInput = z.infer<typeof schema>
 
 export async function deleteTask(input: DeleteTaskInput) {
   await requireProfile(['admin', 'worker'])
-  const supabase = await createSupabaseServerClient()
+  const supabase = await createSupabaseServerClient({
+    allowCookieWrite: true,
+  })
   const parsed = schema.safeParse(input)
 
   if (!parsed.success) {

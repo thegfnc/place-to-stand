@@ -22,7 +22,9 @@ export type MoveTaskInput = z.infer<typeof schema>
 
 export async function moveTask(input: MoveTaskInput) {
   const profile = await requireProfile(['admin', 'worker'])
-  const supabase = await createSupabaseServerClient()
+    const supabase = await createSupabaseServerClient({
+      allowCookieWrite: true,
+    })
   const parsed = schema.safeParse(input)
 
   if (!parsed.success) {

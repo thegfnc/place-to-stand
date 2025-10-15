@@ -51,7 +51,9 @@ export async function deleteUser(
     }
   }
 
-  const supabase = await createSupabaseServerClient()
+  const supabase = await createSupabaseServerClient({
+    allowCookieWrite: true,
+  })
   await supabase.from('profiles').delete().eq('id', profileId)
 
   revalidatePath('/unify/clients')
