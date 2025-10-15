@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import type { Route } from 'next'
 import type { ProfilesRow, UserRole } from '@/src/lib/supabase/types'
 import { cn } from '@/src/lib/utils'
@@ -10,33 +13,25 @@ interface UnifySidebarProps {
 type NavItem = {
   label: string
   path: Route
-  hash?: string
   roles?: UserRole[]
 }
 
 const navItems: NavItem[] = [
-  { label: 'Overview', path: '/unify' as Route },
   {
-    label: 'Admin Console',
-    path: '/unify' as Route,
-    hash: 'admin',
+    label: 'Clients',
+    path: '/unify/clients' as Route,
+    roles: ['admin', 'worker'],
+  },
+  {
+    label: 'Settings',
+    path: '/unify/settings' as Route,
     roles: ['admin'],
-  },
-  {
-    label: 'Kanban Board',
-    path: '/unify' as Route,
-    hash: 'board',
-    roles: ['admin', 'worker'],
-  },
-  {
-    label: 'Time Tracking',
-    path: '/unify' as Route,
-    hash: 'time',
-    roles: ['admin', 'worker'],
   },
 ]
 
 export function UnifySidebar({ profile }: UnifySidebarProps) {
+  const pathname = usePathname()
+
   return (
     <aside className='hidden w-64 flex-col border-r border-slate-800 bg-slate-950/70 p-6 lg:flex'>
       <div className='mb-10 space-y-1'>
@@ -50,20 +45,25 @@ export function UnifySidebar({ profile }: UnifySidebarProps) {
           .filter(item =>
             item.roles ? item.roles.includes(profile.role) : true
           )
-          .map(item => (
-            <Link
-              key={`${item.path}${item.hash ?? ''}`}
-              href={
-                item.hash ? { pathname: item.path, hash: item.hash } : item.path
-              }
-              className={cn(
-                'rounded-md px-3 py-2 font-medium text-slate-200 transition hover:bg-slate-800 hover:text-white',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400'
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
+          .map(item => {
+            const isActive =
+              pathname === item.path || pathname.startsWith(`${item.path}/`)
+
+            return (
+              <Link
+                key={item.path}
+                href={item.path}
+                className={cn(
+                  'rounded-md px-3 py-2 font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400',
+                  isActive
+                    ? 'bg-slate-800 text-white'
+                    : 'text-slate-200 hover:bg-slate-800 hover:text-white'
+                )}
+              >
+                {item.label}
+              </Link>
+            )
+          })}
       </nav>
       <div className='mt-10 space-y-2 text-xs text-slate-500'>
         <p className='font-semibold text-slate-200'>

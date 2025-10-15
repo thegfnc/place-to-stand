@@ -46,10 +46,22 @@ export async function createSupabaseServerClient() {
           return cookieStore.get(name)?.value
         },
         set(name: string, value: string, options: CookieOptions) {
-          cookieStore.set({ name, value, ...options })
+          try {
+            cookieStore.set(name, value, options)
+          } catch (error) {
+            if (process.env.NODE_ENV !== 'production') {
+              console.warn('Unable to set auth cookie in this context', error)
+            }
+          }
         },
         remove(name: string, options: CookieOptions) {
-          cookieStore.set({ name, value: '', ...options, maxAge: 0 })
+          try {
+            cookieStore.set(name, '', { ...options, maxAge: 0 })
+          } catch (error) {
+            if (process.env.NODE_ENV !== 'production') {
+              console.warn('Unable to clear auth cookie in this context', error)
+            }
+          }
         },
       },
     }
