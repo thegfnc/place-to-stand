@@ -16,10 +16,10 @@ import { TimeTrackingPanel } from '@/src/components/unify/time/time-tracking-pan
 import type { TaskStatusId } from '@/src/lib/unify/constants'
 
 interface ProjectDetailParams {
-  params: {
+  params: Promise<{
     clientId: string
     projectId: string
-  }
+  }>
 }
 
 export default async function ProjectDetailPage({
@@ -31,7 +31,7 @@ export default async function ProjectDetailPage({
     redirect('/unify/login?reason=client-portal-not-ready' as Route)
   }
 
-  const { clientId, projectId } = params
+  const { clientId, projectId } = await params
 
   const supabase = await createSupabaseServerClient()
 

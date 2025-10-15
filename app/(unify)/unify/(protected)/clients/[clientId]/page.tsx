@@ -14,9 +14,9 @@ import { UnifyPanel } from '@/src/components/unify/shared/panel'
 import type { TaskStatusId } from '@/src/lib/unify/constants'
 
 interface ClientProjectsParams {
-  params: {
+  params: Promise<{
     clientId: string
-  }
+  }>
 }
 
 interface ProjectSummary {
@@ -39,7 +39,7 @@ export default async function ClientDetailPage({
     redirect('/unify/login?reason=client-portal-not-ready' as Route)
   }
 
-  const { clientId } = params
+  const { clientId } = await params
 
   const supabase = await createSupabaseServerClient()
 
