@@ -20,7 +20,7 @@ const eventDetails = [
   },
   {
     term: 'Admission',
-    lines: ['Free', 'Presentation + Q&A'],
+    lines: ['FREE', 'Presentation + Q&A'],
   },
 ]
 
