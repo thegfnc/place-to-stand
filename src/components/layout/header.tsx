@@ -4,17 +4,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
-
-const NAV_LINKS = [
-  { hash: 'services', label: 'Services' },
-  { hash: 'work', label: 'Work' },
-  { hash: 'how-we-work', label: 'How We Work' },
-  { hash: 'team', label: 'Team' },
-  { hash: 'faq', label: 'FAQ' },
-  { hash: 'contact', label: 'Contact' },
-]
-
-const hashHref = (hash: string) => ({ pathname: '/', hash })
+import { NAV_LINKS, hashHref } from '@/src/components/layout/nav-links'
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
