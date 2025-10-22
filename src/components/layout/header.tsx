@@ -42,7 +42,7 @@ export function Header() {
           'flex w-full max-w-6xl items-center justify-between rounded-full border py-3 pl-7 pr-4 backdrop-blur-lg transition duration-500 hover:bg-white/90',
           scrolled
             ? 'border-ink/10 bg-white/70 shadow-md'
-            : 'border-white/30 bg-white/20'
+            : 'border-ink/10 bg-white/20'
         )}
       >
         <Link href={hashHref('home')} className='flex items-center gap-3'>
