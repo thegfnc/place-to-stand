@@ -126,7 +126,7 @@ export default function RsvpPage() {
             </dl>
           </section>
 
-          <section className='bg-background mt-36 rounded-2xl p-8'>
+          <section className='bg-background mt-36 rounded-2xl md:p-8'>
             <div className='flex flex-col items-center gap-4 text-center'>
               <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
                 Book A Consultation
