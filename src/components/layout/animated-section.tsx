@@ -35,12 +35,13 @@ export function AnimatedSection({
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             setVisible(true)
-            observer.disconnect()
+            observer.unobserve(entry.target)
           }
         })
       },
       {
-        threshold: 0.2,
+        threshold: 0.13,
+        rootMargin: '0px 0px -5% 0px',
       }
     )
 
