@@ -15,17 +15,13 @@ export function AnimatedSection({
   ...props
 }: AnimatedSectionProps) {
   const ref = useRef<HTMLElement | null>(null)
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  })
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
-
-    if (prefersReducedMotion) {
-      setVisible(true)
-      return
-    }
+    if (visible) return
 
     const node = ref.current
     if (!node) return
@@ -48,6 +44,24 @@ export function AnimatedSection({
     observer.observe(node)
 
     return () => observer.disconnect()
+  }, [visible])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      if (event.matches) {
+        setVisible(true)
+      }
+    }
+
+    mediaQuery.addEventListener('change', handleChange)
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange)
+    }
   }, [])
 
   return (

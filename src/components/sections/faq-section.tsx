@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useRef, useState } from 'react'
+import { useId, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 
 import { AnimatedSection } from '@/src/components/layout/animated-section'
@@ -47,36 +47,6 @@ type FAQItemProps = FAQ & {
 function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
   const id = useId()
   const contentId = `${id}-content`
-  const contentRef = useRef<HTMLDivElement | null>(null)
-  const [maxHeight, setMaxHeight] = useState<number>(0)
-
-  useEffect(() => {
-    const element = contentRef.current
-    if (!element) return
-
-    if (!isOpen) {
-      setMaxHeight(0)
-      return
-    }
-
-    const updateHeight = () => {
-      setMaxHeight(element.scrollHeight)
-    }
-
-    updateHeight()
-
-    if (typeof window !== 'undefined' && 'ResizeObserver' in window) {
-      const observer = new ResizeObserver(() => {
-        updateHeight()
-      })
-
-      observer.observe(element)
-
-      return () => {
-        observer.disconnect()
-      }
-    }
-  }, [isOpen])
 
   return (
     <div
@@ -107,18 +77,20 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
         role='region'
         aria-labelledby={id}
         aria-hidden={!isOpen}
-        style={{ maxHeight: isOpen ? `${maxHeight}px` : '0px' }}
         className={cn(
-          'overflow-hidden border-t border-transparent transition-all duration-500 ease-in-out',
-          isOpen ? 'border-ink/10' : 'opacity-0'
+          'grid overflow-hidden border-t border-transparent transition-all duration-500 ease-in-out',
+          isOpen ? 'grid-rows-[1fr] border-ink/10' : 'grid-rows-[0fr] opacity-0'
         )}
       >
-        <div
-          ref={contentRef}
-          className='px-6 py-6 text-base text-ink/70 transition-opacity duration-300 ease-out'
-          style={{ opacity: isOpen ? 1 : 0 }}
-        >
-          {answer}
+        <div className='overflow-hidden'>
+          <div
+            className={cn(
+              'px-6 py-6 text-base text-ink/70 transition-opacity duration-300 ease-out',
+              isOpen ? 'opacity-100' : 'opacity-0'
+            )}
+          >
+            {answer}
+          </div>
         </div>
       </div>
     </div>
