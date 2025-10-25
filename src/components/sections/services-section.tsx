@@ -36,7 +36,7 @@ const services: Array<{
     icon: Code2,
   },
   {
-    title: 'Automations & Integrations Set Up',
+    title: 'Automations + Integrations Set Up',
     description:
       'Connect your tools and data sources so automation becomes your competitive advantage.',
     icon: PlugZap2,
