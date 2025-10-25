@@ -135,8 +135,8 @@ export default function RsvpPage() {
                 Want to talk sooner?
               </h2>
               <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
-                Grab some time with our team right now to go learn more about
-                the emerging AI playbook for SMBs and how it can benefit your
+                Grab some time with our team right now to learn more about the
+                emerging AI playbook for SMBs and how it can benefit your
                 business.
               </p>
             </div>
