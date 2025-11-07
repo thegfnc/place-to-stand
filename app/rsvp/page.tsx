@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import type { Metadata } from 'next'
 
-import { FilloutForm } from './_components/fillout-form'
+import { FilloutForm } from '../../src/components/fillout-form'
 
 const filloutFormId = 'dtJoNAa9CEus'
 const filloutBookingId = 'igqt6ype65us'

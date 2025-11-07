@@ -19,6 +19,10 @@ import {
   type ContactFormValues,
 } from '@/src/lib/validations/contact'
 
+import { FilloutForm } from '../fillout-form'
+
+const filloutBookingId = 'igqt6ype65us'
+
 export function ContactSection() {
   const [isPending, startTransition] = useTransition()
   const [isSuccess, setIsSuccess] = useState(false)
@@ -77,116 +81,121 @@ export function ContactSection() {
           follow up within one business day.
         </p>
       </div>
-      <div className='relative mx-auto w-full max-w-2xl gap-10 rounded-xl border border-ink/10 bg-white/80 p-10 shadow-md backdrop-blur'>
-        <form
-          noValidate
-          onSubmit={onSubmit}
-          className={`flex flex-col gap-6 transition-opacity ${
-            isSuccess ? 'pointer-events-none opacity-0' : 'opacity-100'
-          }`}
-          aria-hidden={isSuccess}
-        >
-          <div className='flex flex-col gap-2'>
-            <Label htmlFor='name'>Name</Label>
-            <Input
-              id='name'
-              {...form.register('name')}
-              aria-invalid={!!form.formState.errors.name}
-            />
-            {form.formState.errors.name ? (
-              <p className='text-sm text-red-600'>
-                {form.formState.errors.name.message}
-              </p>
-            ) : null}
-          </div>
-          <div className='flex flex-col gap-2'>
-            <Label htmlFor='email'>Email</Label>
-            <Input
-              id='email'
-              type='email'
-              {...form.register('email')}
-              aria-invalid={!!form.formState.errors.email}
-            />
-            {form.formState.errors.email ? (
-              <p className='text-sm text-red-600'>
-                {form.formState.errors.email.message}
-              </p>
-            ) : null}
-          </div>
-          <div className='flex flex-col gap-2'>
-            <Label htmlFor='company'>Company Name (optional)</Label>
-            <Input
-              id='company'
-              {...form.register('company')}
-              aria-invalid={!!form.formState.errors.company}
-            />
-            {form.formState.errors.company ? (
-              <p className='text-sm text-red-600'>
-                {form.formState.errors.company.message}
-              </p>
-            ) : null}
-          </div>
-          <div className='flex flex-col gap-2'>
-            <Label htmlFor='website'>Website (optional)</Label>
-            <Input
-              id='website'
-              type='url'
-              placeholder='https://example.com'
-              {...form.register('website')}
-              aria-invalid={!!form.formState.errors.website}
-            />
-            {form.formState.errors.website ? (
-              <p className='text-sm text-red-600'>
-                {form.formState.errors.website.message}
-              </p>
-            ) : null}
-          </div>
-          <div className='flex flex-col gap-2'>
-            <Label htmlFor='message'>Message</Label>
-            <Textarea
-              id='message'
-              rows={5}
-              {...form.register('message')}
-              aria-invalid={!!form.formState.errors.message}
-            />
-            {form.formState.errors.message ? (
-              <p className='text-sm text-red-600'>
-                {form.formState.errors.message.message}
-              </p>
-            ) : null}
-          </div>
-          <Button
-            type='submit'
-            disabled={isPending}
-            className='self-start px-8'
-            size='lg'
+      <div className='grid gap-8 md:grid-cols-2'>
+        <div className='relative w-full gap-10 rounded-xl border border-ink/10 bg-white/80 p-10'>
+          <form
+            noValidate
+            onSubmit={onSubmit}
+            className={`flex flex-col gap-6 transition-opacity ${
+              isSuccess ? 'pointer-events-none opacity-0' : 'opacity-100'
+            }`}
+            aria-hidden={isSuccess}
           >
-            {isPending ? 'Sending...' : 'Send Message'}
-          </Button>
-        </form>
-
-        {isSuccess ? (
-          <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 rounded-xl bg-white/95 text-center shadow-inner'>
-            <h3 className='text-2xl font-semibold uppercase text-ink'>
-              Thank you!
-            </h3>
-            <p className='max-w-md text-balance text-base text-ink/70'>
-              Your message has been sent. We&apos;ll reach out within one
-              business day.
-            </p>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='name'>Name</Label>
+              <Input
+                id='name'
+                {...form.register('name')}
+                aria-invalid={!!form.formState.errors.name}
+              />
+              {form.formState.errors.name ? (
+                <p className='text-sm text-red-600'>
+                  {form.formState.errors.name.message}
+                </p>
+              ) : null}
+            </div>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='email'>Email</Label>
+              <Input
+                id='email'
+                type='email'
+                {...form.register('email')}
+                aria-invalid={!!form.formState.errors.email}
+              />
+              {form.formState.errors.email ? (
+                <p className='text-sm text-red-600'>
+                  {form.formState.errors.email.message}
+                </p>
+              ) : null}
+            </div>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='company'>Company Name (optional)</Label>
+              <Input
+                id='company'
+                {...form.register('company')}
+                aria-invalid={!!form.formState.errors.company}
+              />
+              {form.formState.errors.company ? (
+                <p className='text-sm text-red-600'>
+                  {form.formState.errors.company.message}
+                </p>
+              ) : null}
+            </div>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='website'>Website (optional)</Label>
+              <Input
+                id='website'
+                type='url'
+                placeholder='https://example.com'
+                {...form.register('website')}
+                aria-invalid={!!form.formState.errors.website}
+              />
+              {form.formState.errors.website ? (
+                <p className='text-sm text-red-600'>
+                  {form.formState.errors.website.message}
+                </p>
+              ) : null}
+            </div>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='message'>Message</Label>
+              <Textarea
+                id='message'
+                rows={5}
+                {...form.register('message')}
+                aria-invalid={!!form.formState.errors.message}
+              />
+              {form.formState.errors.message ? (
+                <p className='text-sm text-red-600'>
+                  {form.formState.errors.message.message}
+                </p>
+              ) : null}
+            </div>
             <Button
-              type='button'
+              type='submit'
+              disabled={isPending}
+              className='self-start px-8'
               size='lg'
-              className='px-8'
-              onClick={() => {
-                form.reset()
-                setIsSuccess(false)
-              }}
             >
-              Send another message
+              {isPending ? 'Sending...' : 'Send Message'}
             </Button>
-          </div>
-        ) : null}
+          </form>
+
+          {isSuccess ? (
+            <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 rounded-xl bg-white/95 text-center shadow-inner'>
+              <h3 className='text-2xl font-semibold uppercase text-ink'>
+                Thank you!
+              </h3>
+              <p className='max-w-md text-balance text-base text-ink/70'>
+                Your message has been sent. We&apos;ll reach out within one
+                business day.
+              </p>
+              <Button
+                type='button'
+                size='lg'
+                className='px-8'
+                onClick={() => {
+                  form.reset()
+                  setIsSuccess(false)
+                }}
+              >
+                Send another message
+              </Button>
+            </div>
+          ) : null}
+        </div>
+        <div className='relative w-full overflow-hidden rounded-xl border border-ink/10 bg-white/80'>
+          <FilloutForm filloutId={filloutBookingId} />
+        </div>
       </div>
     </AnimatedSection>
   )
