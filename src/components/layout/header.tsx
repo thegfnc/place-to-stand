@@ -29,23 +29,21 @@ export function Header() {
     >
       <div
         className={cn(
-          'flex w-full max-w-6xl items-center justify-between rounded-full border py-3 pl-7 pr-4 backdrop-blur-lg transition duration-500 hover:bg-white/90',
-          scrolled
-            ? 'border-ink/10 bg-white/70 shadow-md'
-            : 'border-ink/10 bg-white/20'
+          'flex w-full max-w-6xl items-center justify-between border-2 border-ink bg-white py-3 pl-7 pr-4 transition-all duration-500',
+          scrolled ? 'shadow-neo' : 'shadow-none'
         )}
       >
         <Link href={hashHref('home')} className='flex items-center gap-3'>
-          <span className='font-logo text-2xl font-semibold uppercase tracking-[0.025em] text-ink'>
+          <span className='font-logo text-2xl font-bold uppercase tracking-[0.025em] text-ink'>
             Place To Stand
           </span>
         </Link>
-        <nav className='hidden items-center gap-5 md:flex'>
+        <nav className='hidden items-center gap-8 md:flex'>
           {NAV_LINKS.map(item => (
             <Link
               key={item.hash}
               href={hashHref(item.hash)}
-              className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/70 transition hover:text-ink'
+              className='text-sm font-bold uppercase tracking-widest text-ink transition hover:text-accent hover:underline hover:decoration-2 hover:underline-offset-4'
             >
               {item.label}
             </Link>
@@ -55,8 +53,8 @@ export function Header() {
           <Button
             asChild
             size='sm'
-            variant='secondary'
-            className='hidden px-11 md:inline-flex'
+            variant='primary'
+            className='hidden px-8 md:inline-flex'
           >
             <Link href={hashHref('contact')}>Start a Project</Link>
           </Button>
@@ -74,11 +72,11 @@ export function Header() {
               className='h-8 w-8 text-ink'
               fill='none'
               stroke='currentColor'
-              strokeWidth='1.5'
+              strokeWidth='2'
             >
               <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
+                strokeLinecap='square'
+                strokeLinejoin='miter'
                 d='M4 7h16M4 12h16M4 17h16'
               />
             </svg>
@@ -96,7 +94,7 @@ export function Header() {
         <nav
           id='mobile-nav'
           className={cn(
-            'flex w-full max-w-6xl flex-col gap-2 rounded-[28px] border border-ink/10 bg-white p-6 text-center shadow-xl transition md:hidden'
+            'flex w-full max-w-6xl flex-col gap-2 border-2 border-ink bg-white p-6 text-center shadow-neo transition md:hidden'
           )}
         >
           {NAV_LINKS.map(item => (

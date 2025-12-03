@@ -70,20 +70,20 @@ const projects: Project[] = [
 
 export function WorkSection() {
   return (
-    <AnimatedSection id='work' className='flex flex-col gap-20'>
-      <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
+    <AnimatedSection id='work' className='flex flex-col gap-20 py-20'>
+      <div className='flex flex-col items-center gap-6 text-center'>
+        <span className='border-2 border-ink bg-accent/80 px-4 py-1 text-sm font-bold uppercase tracking-widest text-ink shadow-neo'>
           Work
         </span>
-        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
+        <h2 className='max-w-5xl text-balance font-headline text-5xl font-bold uppercase !leading-[.9] tracking-tighter text-ink md:text-7xl'>
           Select projects that moved the needle
         </h2>
-        <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
+        <p className='max-w-xl text-balance text-lg font-medium text-ink'>
           A look at the product, marketing, and brand experiences we craft with
           our partners.
         </p>
       </div>
-      <div className='grid gap-6 md:grid-cols-2'>
+      <div className='grid gap-8 md:grid-cols-2'>
         {projects.map(project => (
           <a
             key={project.title}
@@ -91,26 +91,26 @@ export function WorkSection() {
             target='_blank'
             rel='noreferrer noopener'
             aria-label={`View ${project.title} project (opens in a new tab)`}
-            className='group flex flex-col overflow-hidden rounded-xl border border-ink/10 bg-white/80 shadow-md backdrop-blur transition duration-500 hover:-translate-y-1 hover:shadow-xl focus-visible:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink/40'
+            className='group flex flex-col border-2 border-ink bg-white shadow-neo transition-all duration-300 hover:-translate-y-1 hover:translate-x-1 hover:shadow-neo-lg focus-visible:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink'
           >
-            <div className='relative aspect-video w-full overflow-hidden'>
+            <div className='relative aspect-video w-full overflow-hidden border-b-2 border-ink'>
               <Image
                 src={project.image}
                 alt={`${project.title} project thumbnail`}
                 fill
-                className='object-cover'
+                className='object-cover transition-transform duration-500'
               />
             </div>
-            <div className='flex grow flex-col justify-between gap-3 p-6'>
-              <div className='flex flex-col gap-3'>
-                <h3 className='font-headline text-2xl font-semibold uppercase leading-none'>
+            <div className='flex grow flex-col justify-between gap-4 p-6'>
+              <div className='flex flex-col gap-2'>
+                <h3 className='font-display text-3xl font-bold uppercase text-ink'>
                   {project.title}
                 </h3>
-                <p className='text-base !leading-snug text-ink/60'>
+                <p className='text-lg font-medium text-ink/80'>
                   {project.description}
                 </p>
               </div>
-              <span className='inline-flex items-center gap-2 text-sm font-semibold uppercase text-ink transition group-hover:text-ink/70 group-focus-visible:text-ink/70'>
+              <span className='inline-flex w-fit items-center gap-2 border-2 border-ink bg-accent/80 px-4 py-2 text-sm font-bold uppercase tracking-wider text-ink shadow-neo transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:shadow-neo-lg'>
                 View Project
                 <span
                   aria-hidden
