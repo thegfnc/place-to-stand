@@ -6,23 +6,22 @@ import { forwardRef, type ButtonHTMLAttributes } from 'react'
 import { cn } from '@/src/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-none border-2 border-ink text-sm font-bold uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         primary:
-          'bg-gradientPrimary text-white shadow-md shadow-primary/40 hover:opacity-90 border border-ink/40 hover:text-white hover:border-ink/90 hover:shadow-lg',
+          'bg-gradientPrimary text-ink shadow-neo hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-neo-lg active:translate-x-[4px] active:translate-y-[4px] active:shadow-none',
         secondary:
-          'bg-ink/80 text-ink-light hover:bg-ink/100 focus-visible:ring-ink hover:text-ink-light',
-        ghost:
-          'bg-transparent text-ink/70 hover:text-ink/100 focus-visible:ring-ink/40',
+          'bg-white text-ink shadow-neo hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-neo-lg active:translate-x-[4px] active:translate-y-[4px] active:shadow-none',
+        ghost: 'bg-transparent border-transparent text-ink hover:bg-ink/5',
         outline:
-          'bg-transparent border border-ink/30 text-ink/80 hover:bg-ink/5 focus-visible:ring-ink/40 hover:border-ink/60',
+          'bg-transparent text-ink shadow-neo hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-neo-lg active:translate-x-[4px] active:translate-y-[4px] active:shadow-none',
       },
       size: {
-        sm: 'h-9 px-4',
-        md: 'h-11 px-6',
-        lg: 'h-12 px-8 text-base',
+        sm: 'h-9 px-4 text-xs',
+        md: 'h-12 px-6',
+        lg: 'h-14 px-8 text-base',
       },
     },
     defaultVariants: {

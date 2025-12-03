@@ -51,8 +51,8 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
   return (
     <div
       className={cn(
-        'mx-auto max-w-4xl overflow-hidden rounded-xl border border-ink/10 bg-white/80 shadow-sm transition-all duration-300 ease-out hover:border-ink/60',
-        isOpen ? 'border-ink/10 shadow-md' : ''
+        'mx-auto max-w-4xl overflow-hidden border-2 border-ink bg-white shadow-neo transition-all duration-300 ease-out hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-neo-lg',
+        isOpen ? '-translate-y-0.5 translate-x-0.5 shadow-neo-lg' : ''
       )}
     >
       <button
@@ -61,16 +61,17 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        className='flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-lg font-semibold uppercase tracking-[0.05em] text-ink transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink/40'
+        className='flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-xl font-bold uppercase tracking-wide text-ink transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink'
       >
-        <span className='text-balance'>{question}</span>
-        <ChevronDown
-          aria-hidden
+        <span className='text-balance font-display'>{question}</span>
+        <div
           className={cn(
-            'h-5 w-5 shrink-0 text-ink/50 transition-transform duration-300 ease-out',
-            isOpen && 'rotate-180 text-ink'
+            'border-2 border-ink p-1 transition-transform duration-300',
+            isOpen && 'rotate-180 bg-accent/80'
           )}
-        />
+        >
+          <ChevronDown aria-hidden className='h-5 w-5 shrink-0 text-ink' />
+        </div>
       </button>
       <div
         id={contentId}
@@ -78,14 +79,14 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
         aria-labelledby={id}
         aria-hidden={!isOpen}
         className={cn(
-          'grid overflow-hidden border-t border-transparent transition-all duration-500 ease-in-out',
-          isOpen ? 'grid-rows-[1fr] border-ink/10' : 'grid-rows-[0fr] opacity-0'
+          'grid overflow-hidden border-t-2 border-transparent transition-all duration-500 ease-in-out',
+          isOpen ? 'grid-rows-[1fr] border-ink' : 'grid-rows-[0fr] opacity-0'
         )}
       >
         <div className='overflow-hidden'>
           <div
             className={cn(
-              'px-6 py-6 text-base text-ink/70 transition-opacity duration-300 ease-out',
+              'px-6 py-6 text-lg font-medium text-ink/80 transition-opacity duration-300 ease-out',
               isOpen ? 'opacity-100' : 'opacity-0'
             )}
           >
@@ -98,32 +99,32 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
 }
 
 export function FaqSection() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index)
+  }
 
   return (
-    <AnimatedSection id='faq' className='flex flex-col gap-20'>
-      <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
+    <AnimatedSection id='faq' className='flex flex-col gap-20 py-20'>
+      <div className='flex flex-col items-center gap-6 text-center'>
+        <span className='border-2 border-ink bg-accent/80 px-4 py-1 text-sm font-bold uppercase tracking-widest text-ink shadow-neo'>
           FAQ
         </span>
-        <h2 className='max-w-4xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
-          The answers you’re looking for
+        <h2 className='max-w-5xl text-balance font-headline text-5xl font-bold uppercase !leading-[.9] tracking-tighter text-ink md:text-7xl'>
+          Common questions
         </h2>
-        <p className='max-w-2xl text-balance text-lg !leading-snug text-ink/60'>
-          The essentials that most clients ask us before we kick off a new
-          engagement. Please reach out if you have other questions. We’re happy
-          to answer them!
+        <p className='max-w-xl text-balance text-lg font-medium text-ink'>
+          Everything you need to know about how we work and what to expect.
         </p>
       </div>
-      <div className='flex flex-col gap-4'>
+      <div className='flex flex-col gap-6'>
         {faqs.map((faq, index) => (
           <FAQItem
-            key={faq.question}
+            key={index}
             {...faq}
-            isOpen={activeIndex === index}
-            onToggle={() =>
-              setActiveIndex(prev => (prev === index ? null : index))
-            }
+            isOpen={openIndex === index}
+            onToggle={() => handleToggle(index)}
           />
         ))}
       </div>

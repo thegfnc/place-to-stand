@@ -4,7 +4,7 @@ import { NAV_LINKS, hashHref } from '@/src/components/layout/nav-links'
 export function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className='bg-ink text-ink-light'>
+    <footer className='border-t-2 border-ink bg-ink text-ink-light'>
       <div className='mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 py-12 md:flex-row md:items-start md:justify-between'>
         <div className='flex flex-col gap-3'>
           <span className='font-logo text-lg font-semibold uppercase tracking-[0.025em]'>

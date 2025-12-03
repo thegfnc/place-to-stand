@@ -68,21 +68,21 @@ export function ContactSection() {
   })
 
   return (
-    <AnimatedSection id='contact' className='flex flex-col gap-20'>
-      <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
+    <AnimatedSection id='contact' className='flex flex-col gap-20 py-20'>
+      <div className='flex flex-col items-center gap-6 text-center'>
+        <span className='border-2 border-ink bg-accent/80 px-4 py-1 text-sm font-bold uppercase tracking-widest text-ink shadow-neo'>
           Contact
         </span>
-        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
+        <h2 className='max-w-5xl text-balance font-headline text-5xl font-bold uppercase !leading-[.9] tracking-tighter text-ink md:text-7xl'>
           Let’s move forward together
         </h2>
-        <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
+        <p className='max-w-xl text-balance text-lg font-medium text-ink'>
           Tell us about the investments you&apos;d like to make and we&apos;ll
           follow up within one business day.
         </p>
       </div>
       <div className='grid gap-8 md:grid-cols-2'>
-        <div className='relative w-full gap-10 rounded-xl border border-ink/10 bg-white/80 p-10'>
+        <div className='relative w-full gap-10 border-2 border-ink bg-white p-10 shadow-neo'>
           <form
             noValidate
             onSubmit={onSubmit}
@@ -92,7 +92,9 @@ export function ContactSection() {
             aria-hidden={isSuccess}
           >
             <div className='flex flex-col gap-2'>
-              <Label htmlFor='name'>Name</Label>
+              <Label htmlFor='name' className='font-bold uppercase'>
+                Name
+              </Label>
               <Input
                 id='name'
                 {...form.register('name')}
@@ -171,11 +173,11 @@ export function ContactSection() {
           </form>
 
           {isSuccess ? (
-            <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 rounded-xl bg-white/95 text-center shadow-inner'>
-              <h3 className='text-2xl font-semibold uppercase text-ink'>
+            <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 border-2 border-ink bg-white text-center shadow-neo'>
+              <h3 className='font-display text-3xl font-bold uppercase text-ink'>
                 Thank you!
               </h3>
-              <p className='max-w-md text-balance text-base text-ink/70'>
+              <p className='max-w-md text-balance text-lg font-medium text-ink/80'>
                 Your message has been sent. We&apos;ll reach out within one
                 business day.
               </p>
@@ -193,7 +195,7 @@ export function ContactSection() {
             </div>
           ) : null}
         </div>
-        <div className='relative w-full overflow-hidden rounded-xl border border-ink/10 bg-white/80'>
+        <div className='relative w-full overflow-hidden border-2 border-ink bg-white shadow-neo'>
           <FilloutForm filloutId={filloutBookingId} />
         </div>
       </div>

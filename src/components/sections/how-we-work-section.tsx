@@ -29,32 +29,35 @@ const steps = [
 
 export function HowWeWorkSection() {
   return (
-    <AnimatedSection id='how-we-work' className='flex flex-col gap-20'>
-      <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
+    <AnimatedSection id='how-we-work' className='flex flex-col gap-20 py-20'>
+      <div className='flex flex-col items-center gap-6 text-center'>
+        <span className='border-2 border-ink bg-accent/80 px-4 py-1 text-sm font-bold uppercase tracking-widest text-ink shadow-neo'>
           How we work
         </span>
-        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
+        <h2 className='max-w-5xl text-balance font-headline text-5xl font-bold uppercase !leading-[.9] tracking-tighter text-ink md:text-7xl'>
           Our engagement playbook
         </h2>
-        <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
+        <p className='max-w-xl text-balance text-lg font-medium text-ink'>
           A proven rhythm that keeps projects transparent, collaborative, and
           relentlessly focused on momentum.
         </p>
       </div>
-      <ol className='grid gap-6 md:grid-cols-2'>
+      <ol className='grid gap-8 md:grid-cols-2'>
         {steps.map(step => (
           <li
             key={step.number}
-            className='group relative flex flex-col gap-4 overflow-hidden rounded-xl border border-ink/10 bg-white/80 p-8 shadow-md backdrop-blur transition duration-500 hover:-translate-y-1 hover:border-ink/20 hover:shadow-xl'
+            className='group relative flex flex-col gap-6 border-2 border-ink bg-white p-8 shadow-neo transition-all duration-300 hover:-translate-y-1 hover:translate-x-1 hover:shadow-neo-lg'
           >
-            <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/50'>
-              {step.number}
-            </span>
-            <h3 className='font-headline text-2xl uppercase leading-none'>
+            <div className='flex items-center justify-between border-b-2 border-ink pb-4'>
+              <span className='font-display text-6xl font-bold text-ink/20 transition-colors group-hover:text-accent'>
+                {step.number}
+              </span>
+              <div className='h-4 w-4 bg-ink' />
+            </div>
+            <h3 className='font-display text-3xl font-bold uppercase text-ink'>
               {step.title}
             </h3>
-            <p className='text-base !leading-snug text-ink/60'>
+            <p className='text-lg font-medium text-ink/80'>
               {step.description}
             </p>
           </li>
