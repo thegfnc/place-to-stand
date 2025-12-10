@@ -78,11 +78,16 @@ Environment variables:
 
 - `RESEND_API_KEY` — required for contact form submission
 - `RESEND_AUDIENCE_ID` — required; Resend audience that stores new leads
-- `ASANA_ACCESS_TOKEN` — required; personal access token with permission to create tasks
-- `ASANA_WORKSPACE_GID` — required; workspace that owns the leads board
-- `ASANA_PROJECT_GID` — required; project (leads board) to receive new tasks
-- `ASANA_SECTION_GID` — optional; board column for new tasks
+- `PORTAL_LEADS_ENDPOINT` — required; `https://portal.<domain>/api/integrations/leads-intake`
+- `PORTAL_LEADS_TOKEN` — required; bearer token shared with the portal’s `LEADS_INTAKE_TOKEN`
 - `NEXT_PUBLIC_VERCEL_ANALYTICS_ID` — optional if using Vercel Analytics locally
+
+### Lead intake configuration
+
+1. Generate a shared secret with `openssl rand -hex 32` (or another secure random string generator).
+2. Set the generated value as `LEADS_INTAKE_TOKEN` in the portal environment and `PORTAL_LEADS_TOKEN` in this marketing site.
+3. Point `PORTAL_LEADS_ENDPOINT` to the portal instance (e.g. `https://portal.placetostandagency.com/api/integrations/leads-intake`).
+4. Deploy both apps so the marketing site can post newly submitted leads directly into the portal board.
 
 ## Development Workflow
 

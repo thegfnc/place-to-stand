@@ -8,6 +8,8 @@ import {
   type ContactFormValues,
 } from '@/src/lib/validations/contact'
 
+const WEBSITE_SOURCE_DETAIL = 'https://placetostandagency.com/'
+
 export type ContactActionResult =
   | { success: true }
   | {
@@ -55,10 +57,8 @@ export async function sendContact(
 
   const apiKey = process.env.RESEND_API_KEY
   const audienceId = process.env.RESEND_AUDIENCE_ID
-  const asanaAccessToken = process.env.ASANA_ACCESS_TOKEN
-  const asanaWorkspaceGid = process.env.ASANA_WORKSPACE_GID
-  const asanaProjectGid = process.env.ASANA_PROJECT_GID
-  const asanaSectionGid = process.env.ASANA_SECTION_GID
+  const portalLeadsEndpoint = process.env.PORTAL_LEADS_ENDPOINT
+  const portalLeadsToken = process.env.PORTAL_LEADS_TOKEN
 
   if (!apiKey) {
     return {
@@ -74,7 +74,7 @@ export async function sendContact(
     } as const
   }
 
-  if (!asanaAccessToken || !asanaWorkspaceGid || !asanaProjectGid) {
+  if (!portalLeadsEndpoint || !portalLeadsToken) {
     return {
       success: false,
       message: 'Lead management is not configured. Please try again later.',
@@ -174,75 +174,42 @@ export async function sendContact(
         }
       }
 
-      const asanaPayload: {
-        data: {
-          name: string
-          notes: string
-          workspace: string
-          projects: string[]
-          memberships?: Array<{ project: string; section: string }>
-        }
-      } = {
-        data: {
-          name: `New lead: ${name}`,
-          notes: detailLines.join('\n'),
-          workspace: asanaWorkspaceGid,
-          projects: [asanaProjectGid],
-        },
+      const portalPayload = {
+        name: trimmedName || name,
+        email,
+        company: trimmedCompany ?? null,
+        website: trimmedWebsite ?? null,
+        message: trimmedMessage || null,
+        sourceDetail: WEBSITE_SOURCE_DETAIL,
       }
 
-      if (asanaSectionGid) {
-        asanaPayload.data.memberships = [
-          { project: asanaProjectGid, section: asanaSectionGid },
-        ]
-      }
-
-      const asanaResponse = await fetch('https://app.asana.com/api/1.0/tasks', {
+      const portalResponse = await fetch(portalLeadsEndpoint, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${asanaAccessToken}`,
+          Authorization: `Bearer ${portalLeadsToken}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(asanaPayload),
+        body: JSON.stringify(portalPayload),
       })
 
-      if (!asanaResponse.ok) {
-        const errorText = await asanaResponse.text()
-        console.error('Failed to create Asana task', {
-          status: asanaResponse.status,
-          statusText: asanaResponse.statusText,
+      if (!portalResponse.ok) {
+        const errorText = await portalResponse.text()
+        console.error('Failed to create portal lead', {
+          status: portalResponse.status,
+          statusText: portalResponse.statusText,
           body: errorText,
         })
 
-        throw new Error('Failed to create a lead task. Please try again later.')
+        throw new Error(
+          'Failed to create a lead record. Please try again later.'
+        )
       }
-
-      const asanaResult = (await asanaResponse.json()) as {
-        data?: {
-          gid?: string
-          permalink_url?: string
-        }
-      }
-
-      const asanaTaskLink =
-        asanaResult?.data?.permalink_url ??
-        (asanaResult?.data?.gid
-          ? `https://app.asana.com/0/${asanaProjectGid}/${asanaResult.data.gid}`
-          : undefined)
 
       const emailLines = [...detailLines]
 
-      if (asanaTaskLink) {
-        emailLines.push(`\nAsana Task: ${asanaTaskLink}`)
-      }
-
       await resend.emails.send({
         from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
-        to: [
-          'hello@placetostandagency.com',
-          'damon@placetostandagency.com',
-          'jason@placetostandagency.com',
-        ],
+        to: ['hello@placetostandagency.com'],
         subject: `New inquiry from ${name}`,
         text: emailLines.join('\n'),
       })
