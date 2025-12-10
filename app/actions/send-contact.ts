@@ -210,6 +210,7 @@ export async function sendContact(
       await resend.emails.send({
         from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
         to: ['hello@placetostandagency.com'],
+        replyTo: email,
         subject: `New inquiry from ${name}`,
         text: emailLines.join('\n'),
       })
