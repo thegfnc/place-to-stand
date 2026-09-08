@@ -15,6 +15,9 @@ const nextConfig = {
   // sure the files ship inside that function's bundle on Vercel.
   outputFileTracingIncludes: {
     '/referral/pdf': ['./public/fonts/**/*'],
+    // The social share image reads the same fonts.
+    '/opengraph-image': ['./public/fonts/**/*'],
+    '/twitter-image': ['./public/fonts/**/*'],
   },
   images: {
     remotePatterns: [
