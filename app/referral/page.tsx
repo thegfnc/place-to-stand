@@ -35,6 +35,13 @@ export default function ReferralPage() {
           <span className='bp-label font-mono'>{c.hero.label}</span>
           <h1 className='max-w-4xl font-headline text-4xl leading-[0.92] font-bold tracking-tight text-balance text-text md:text-6xl'>
             {c.hero.headline}
+            <a
+              href='#referral-terms'
+              aria-label='See referral program terms'
+              className='ml-1 align-super font-mono text-[0.45em] font-normal text-accent transition-colors hover:text-accent/80'
+            >
+              *
+            </a>
           </h1>
           <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
             {c.hero.body}
@@ -225,7 +232,13 @@ export default function ReferralPage() {
             </Button>
           </div>
         </div>
-        <p className='pt-grid-2 text-center text-sm leading-relaxed text-text-muted'>
+        <p
+          id='referral-terms'
+          className='scroll-mt-grid-4 pt-grid-2 text-center text-sm leading-relaxed text-text-muted'
+        >
+          <span className='font-mono text-accent' aria-hidden>
+            *
+          </span>{' '}
           {c.join.note}{' '}
           <TrackedLink
             href={c.join.href}
